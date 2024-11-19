@@ -1,4 +1,4 @@
-<footer class="rts-footer site-footer-one section__padding">
+hhtml<footer class="rts-footer site-footer-one section__padding">
         <div class="container">
             <div class="row">
                 <!-- widget -->
@@ -19,15 +19,15 @@
                         <h5 class="widget-title">Company</h5>
                         <div class="rts-footer__widget--menu ">
                             <ul>
-                                <li><a href="about.php">About Us</a></li>
-                                <li><a href="about.php">Leadership</a></li>
-                                <li><a href="about.php">Capabilities</a></li>
-                                <li><a href="about.php"> Vision</a></li>
+                                <li><a href="about.hhtml">About Us</a></li>
+                                <li><a href="about.hhtml">Leadership</a></li>
+                                <li><a href="about.hhtml">Capabilities</a></li>
+                                <li><a href="about.hhtml"> Vision</a></li>
                              
                                
                             </ul>
                         </div>
-                    </div>
+                    </dhtml
                 </div>
                 <!-- widget end -->
                 <!-- widget -->
@@ -36,11 +36,11 @@
                         <h5 class="widget-title">Solutions</h5>
                         <div class="rts-footer__widget--menu ">
                             <ul>
-                                <li><a href="colocation.php">Colocation Services</a></li>
-                                  <li><a href="edge-computing.php">Edge Computing Solutions</a></li>
-                                <li><a href="network-cloud-solutions.php">Network Connectivity</a></li>
-                                <li><a href="disaster-recovery-backup.php">Disaster Recovery</a></li>
-                                <li><a href="managed-it-services.php">Managed IT Services</a></li>
+                                <li><a href="colocation.html">Colocation Services</a></li>
+                                  <li><a href="edge-computing.html">Edge Computing Solutions</a></li>
+                                <li><a href="network-cloud-solutions.html">Network Connectivity</a></li>
+                                <li><a href="disaster-recovery-backup.html">Disaster Recovery</a></li>
+                                <li><a href="managed-it-services.html">Managed IT Services</a></li>
                               
                                 
                             </ul>
@@ -110,11 +110,11 @@
                                         <li class="menu-item">
         <a href="#">Services <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z"></path></svg></a>
         <div class="dropdown-content">
-          <a href="colocation.php">Colocation </a>
-          <a href="edge-computing.php">Edge Computing </a>
-          <a href="network-cloud-solutions.php">Network & Cloud </a>
-          <a href="disaster-recovery-backup.php">Disaster Recovery </a>
-          <a href="managed-it-services.php">Managed IT Services</a>
+          <a href="colocation.html">Colocation </a>
+          <a href="edge-computing.html">Edge Computing </a>
+          <a href="network-cloud-solutions.html">Network & Cloud </a>
+          <a href="disaster-recovery-backup.html">Disaster Recovery </a>
+          <a href="managed-it-services.html">Managed IT Services</a>
         </div>
       </li> 
                                 <li class="menu-item"><a href="about.php" class="FDC-dropdown-main-element">About</a></li>
