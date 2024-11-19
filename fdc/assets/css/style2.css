@@ -21409,7 +21409,7 @@ header.heder-two .sub-dropdown .submenu.third-lvl.base {
 .rts-service__single--icon.vps__hosting,
 .rts-service__single--icon.email__hosting {
     background: aliceblue;
-    display: none;
+   
 }
 
 .rts-service__single--icon.wordpress__hosting,
@@ -21417,7 +21417,7 @@ header.heder-two .sub-dropdown .submenu.third-lvl.base {
 .rts-service__single--icon.dedicated__hosting,
 .rts-service__single--icon.cloud__hosting {
     background: aliceblue;
-    display: none;
+
 }
 
 .rts-service__single--title {
