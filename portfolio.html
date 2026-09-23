@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/port/fav.png">
+    <title>Portfolio | Rohit Singh - UI/UX Designer</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS (Reusing existing style2.css and custom overrides) -->
+    <link rel="stylesheet" href="assets/css/style2.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0f19;
+            color: #f8fafc;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Premium Header Styling */
+        .rts-header {
+            background: rgba(11, 15, 25, 0.8) !important;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .rts-header__logo img {
+            filter: invert(1);
+        }
+
+        .FDC-menu a {
+            color: #94a3b8 !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .FDC-menu a:hover, .FDC-menu a.active {
+            color: #3b82f6 !important;
+        }
+
+        /* Portfolio Hero Section */
+        .portfolio-hero {
+            padding: 80px 0 60px 0;
+            text-align: center;
+        }
+
+        .portfolio-hero .badge-pill {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: inline-block;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .portfolio-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .portfolio-hero p {
+            color: #94a3b8;
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Filter Controls */
+        .filter-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.02);
+            color: #94a3b8;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .filter-btn:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .filter-btn.active {
+            background: #3b82f6;
+            color: #ffffff;
+            border-color: #3b82f6;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Portfolio Card */
+        .portfolio-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 50px rgba(59, 130, 246, 0.05);
+        }
+
+        /* Card Image Area */
+        .portfolio-card-img-wrapper {
+            position: relative;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            overflow: hidden;
+            background: #0f172a;
+        }
+
+        .portfolio-card-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-card:hover .portfolio-card-img {
+            transform: scale(1.05);
+        }
+
+        /* Card Overlay badge */
+        .portfolio-card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(8px);
+            color: #3b82f6;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            z-index: 2;
+        }
+
+        /* Card Content */
+        .portfolio-card-content {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .portfolio-card-stats {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #ef4444;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .portfolio-card-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .portfolio-card-desc {
+            color: #94a3b8;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .portfolio-card-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 15px;
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .portfolio-card-link {
+            color: #3b82f6;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.2s ease;
+        }
+
+        .portfolio-card-link:hover {
+            color: #60a5fa;
+            gap: 12px;
+        }
+
+        .portfolio-card-deliverables {
+            font-size: 0.75rem;
+            color: #64748b;
+            max-width: 60%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Feature Row Layout (Zupee Highlight) */
+        .zupee-featured-row {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .zupee-featured-row::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .zupee-featured-info {
+            max-width: 55%;
+            z-index: 2;
+        }
+
+        .zupee-featured-visual {
+            z-index: 2;
+            transform: rotate(4deg) translateY(10px);
+            transition: transform 0.4s ease;
+        }
+
+        .zupee-featured-row:hover .zupee-featured-visual {
+            transform: rotate(0deg) translateY(-5px) scale(1.05);
+        }
+
+        .zupee-phone-mock {
+            width: 180px;
+            height: 360px;
+            background: #151b26;
+            border: 5px solid #2d3748;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        .zupee-phone-mock img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .zupee-featured-row {
+                flex-direction: column;
+                padding: 30px;
+                text-align: center;
+            }
+            .zupee-featured-info {
+                max-width: 100%;
+                margin-bottom: 30px;
+            }
+            .zupee-featured-visual {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER AREA -->
+    <header class="rts-header style-six header__default">
+        <div class="container">
+            <div class="row">
+                <div class="d-flex justify-content-between align-items-center py-4">
+                    <!-- FOR LOGO -->
+                    <div class="rts-header__logo">
+                        <a href="index.html" class="site-logo">
+                            <img src="assets/images/r-logo.svg" alt="R" width="20">
+                        </a>
+                    </div>
+                    <!-- FOR NAVIGATION MENU -->
+                    <div class="rts-header__right">
+                        <nav class="rts-header__menu" id="mobile-menu">
+                            <div class="FDC-menu">
+                                <ul class="list-unstyled d-flex align-items-center gap-4 m-0">
+                                    <li><a href="index.html" class="FDC-dropdown-main-element text-decoration-none">Home</a></li>
+                                    <li><a href="portfolio.html" class="FDC-dropdown-main-element text-decoration-none active">Portfolio</a></li>
+                                    <li><a href="https://www.linkedin.com/in/rohitsinghuiux/" target="_blank" class="FDC-dropdown-main-element text-decoration-none">LinkedIn</a></li>
+                                    <li><a href="https://www.youtube.com/@RohitUXD/" target="_blank" class="FDC-dropdown-main-element text-decoration-none">YouTube</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- PORTFOLIO HERO -->
+    <section class="portfolio-hero">
+        <div class="container">
+            <span class="badge-pill">UI/UX Showcase</span>
+            <h1>Selected Projects</h1>
+            <p>Designing digital experiences, mobile interfaces, and conversion-focused websites that solve real user friction.</p>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO WORKSPACE -->
+    <section class="portfolio-workspace pb-5">
+        <div class="container">
+            
+            <!-- Featured Highlight: Zupee Ludo Case Study -->
+            <div class="zupee-featured-row">
+                <div class="zupee-featured-info">
+                    <span style="color: #3b82f6; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 8px;">Featured Case Study</span>
+                    <h2 style="font-size: 2.2rem; font-weight: 800; color: #ffffff; margin-bottom: 12px;">Fixing Zupee Ludo UX</h2>
+                    <p style="color: #94a3b8; font-size: 1rem; line-height: 1.6; margin-bottom: 24px;">
+                        A detailed Product Design case study addressing a critical 30% drop-off rate among Tier 2 and Tier 3 Indian gamers playing Ludo Supreme. Uncovered user friction via field research with cab drivers and security guards, leading to revised flow systems.
+                    </p>
+                    <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+                        <a href="zupee-ludo.html" class="btn btn-primary" style="background: #3b82f6; border: none; padding: 12px 28px; border-radius: 30px; font-weight: 600;">Read Case Study</a>
+                        <span style="font-size: 0.85rem; color: #64748b;"><i class="fa-solid fa-route me-1"></i> Interactive Dashboard inside</span>
+                    </div>
+                </div>
+                <div class="zupee-featured-visual">
+                    <div class="zupee-phone-mock">
+                        <img src="assets/images/port/zupee_ludo_ui.png" alt="Zupee UI Dashboard">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Controls -->
+            <div class="filter-controls">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="product">Product Design / Case Studies</button>
+                <button class="filter-btn" data-filter="mobile">Mobile Apps (Android & iOS)</button>
+                <button class="filter-btn" data-filter="web">Websites & Presentations</button>
+            </div>
+
+            <!-- Grid Items -->
+            <div class="portfolio-grid" id="portfolioGrid">
+                
+                <!-- Item: Fortune Group Website -->
+                <div class="portfolio-card" data-category="web">
+                    <div class="portfolio-card-img-wrapper">
+                        <img class="portfolio-card-img" src="assets/images/port/fortune-mockup.jpg" alt="Fortune Website Mockup">
+                        <span class="portfolio-card-badge">Web Identity</span>
+                    </div>
+                    <div class="portfolio-card-content">
+                        <div class="portfolio-card-stats" style="color: #3b82f6;">
+                            <span>Corporate Web Identity</span>
+                        </div>
+                        <h3 class="portfolio-card-title">Fortune Data Centres</h3>
+                        <p class="portfolio-card-desc">Created the corporate identity, design tokens, responsive typography, and layouts in Figma for Fortune Data Centres. Developed with Bootstrap.</p>
+                        <div class="portfolio-card-footer">
+                            <a href="fdc/index.html" class="portfolio-card-link" target="_blank">View Live <i class="fa-solid fa-arrow-right"></i></a>
+                            <span class="portfolio-card-deliverables">Bootstrap / UI / Design System</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item: Fortune Presentation -->
+                <div class="portfolio-card" data-category="web">
+                    <div class="portfolio-card-img-wrapper">
+                        <img class="portfolio-card-img" src="assets/images/port/6.jpg" alt="Fortune Presentation Mockup">
+                        <span class="portfolio-card-badge">Presentation</span>
+                    </div>
+                    <div class="portfolio-card-content">
+                        <div class="portfolio-card-stats" style="color: #3b82f6;">
+                            <span>Corporate deck</span>
+                        </div>
+                        <h3 class="portfolio-card-title">Fortune Business Deck</h3>
+                        <p class="portfolio-card-desc">Designed custom visual assets, illustrations, typography, and charts using Figma & Photoshop to explain complex data center architectures.</p>
+                        <div class="portfolio-card-footer">
+                            <a href="fdc/CompanyProfile.pdf#zoom=33" class="portfolio-card-link" target="_blank">View Presentation <i class="fa-solid fa-arrow-right"></i></a>
+                            <span class="portfolio-card-deliverables">Visual Assets / Layout</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item: Auto Call Recorder -->
+                <div class="portfolio-card" data-category="mobile">
+                    <div class="portfolio-card-img-wrapper">
+                        <img class="portfolio-card-img" src="assets/images/port/acr.jpg" alt="Auto Call Recorder app screen">
+                        <span class="portfolio-card-badge">Mobile App</span>
+                    </div>
+                    <div class="portfolio-card-content">
+                        <div class="portfolio-card-stats">
+                            <i class="fa-solid fa-download me-1"></i> 40M+ Downloads
+                        </div>
+                        <h3 class="portfolio-card-title">Auto Call Recorder</h3>
+                        <p class="portfolio-card-desc">Designed user-friendly caller UI, recording dashboards, and simple media players for one of Quantum4U's most downloaded utilities.</p>
+                        <div class="portfolio-card-footer">
+                            <a href="https://play.google.com/store/apps/details?id=com.q4u.autocallrecorder" class="portfolio-card-link" target="_blank">View PlayStore <i class="fa-solid fa-arrow-right"></i></a>
+                            <span class="portfolio-card-deliverables">UX flow / UI System</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item: PhoneSwitch -->
+                <div class="portfolio-card" data-category="mobile">
+                    <div class="portfolio-card-img-wrapper">
+                        <img class="portfolio-card-img" src="assets/images/port/ps1.png" alt="PhoneSwitch app screen">
+                        <span class="portfolio-card-badge">Mobile App</span>
+                    </div>
+                    <div class="portfolio-card-content">
+                        <div class="portfolio-card-stats">
+                            <i class="fa-solid fa-download me-1"></i> 5M+ Downloads
+                        </div>
+                        <h3 class="portfolio-card-title">PhoneSwitch</h3>
+                        <p class="portfolio-card-desc">Created user flows and interactive visual queues to simplify the cross-platform (Android to iOS) content migration experience.</p>
+                        <div class="portfolio-card-footer">
+                            <a href="https://play.google.com/store/apps/details?id=com.quantum.poleshare" class="portfolio-card-link" target="_blank">View PlayStore <i class="fa-solid fa-arrow-right"></i></a>
+                            <span class="portfolio-card-deliverables">Cross-platform UX / UI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item: ShareAll -->
+                <div class="portfolio-card" data-category="mobile">
+                    <div class="portfolio-card-img-wrapper">
+                        <img class="portfolio-card-img" src="assets/images/port/shareall.jpg" alt="ShareAll app screen">
+                        <span class="portfolio-card-badge">Mobile App</span>
+                    </div>
+                    <div class="portfolio-card-content">
+                        <div class="portfolio-card-stats">
+                            <i class="fa-solid fa-download me-1"></i> 45M+ Downloads
+                        </div>
+                        <h3 class="portfolio-card-title">ShareAll (iOS Version)</h3>
+                        <p class="portfolio-card-desc">Redesigned the wireless files transfer interface for Apple ecosystem. Enhanced performance metrics by optimizing layout indicators.</p>
+                        <div class="portfolio-card-footer">
+                            <a href="https://apps.apple.com/tr/app/poleshare-transfer-send/id1535744130" class="portfolio-card-link" target="_blank">View App Store <i class="fa-solid fa-arrow-right"></i></a>
+                            <span class="portfolio-card-deliverables">iOS Design / Layout</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item: Pedometer -->
+                <div class="portfolio-card" data-category="mobile">
+                    <div class="portfolio-card-img-wrapper">
+                        <img class="portfolio-card-img" src="assets/images/port/pedometer.png" alt="Pedometer app screen">
+                        <span class="portfolio-card-badge">Mobile App</span>
+                    </div>
+                    <div class="portfolio-card-content">
+                        <div class="portfolio-card-stats">
+                            <i class="fa-solid fa-download me-1"></i> 100K+ Downloads
+                        </div>
+                        <h3 class="portfolio-card-title">Pedometer & Step Tracker</h3>
+                        <p class="portfolio-card-desc">Designed clear visual goals, progress charts, achievements screens, and calories trackers to build and track healthy daily routines.</p>
+                        <div class="portfolio-card-footer">
+                            <a href="https://play.google.com/store/apps/details?id=com.quantum.padometer" class="portfolio-card-link" target="_blank">View PlayStore <i class="fa-solid fa-arrow-right"></i></a>
+                            <span class="portfolio-card-deliverables">Dashboard / Analytics</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item: Miracast -->
+                <div class="portfolio-card" data-category="mobile">
+                    <div class="portfolio-card-img-wrapper">
+                        <img class="portfolio-card-img" src="assets/images/port/screenmirror.jpg" alt="Miracast app screen">
+                        <span class="portfolio-card-badge">Mobile App</span>
+                    </div>
+                    <div class="portfolio-card-content">
+                        <div class="portfolio-card-stats">
+                            <i class="fa-solid fa-download me-1"></i> 5M+ Downloads
+                        </div>
+                        <h3 class="portfolio-card-title">Miracast & TV Cast</h3>
+                        <p class="portfolio-card-desc">UX logic and interface layout designed to establish high-definition casting connections with minimal clicks and immediate response.</p>
+                        <div class="portfolio-card-footer">
+                            <a href="https://play.google.com/store/apps/details?id=com.pnd.shareall" class="portfolio-card-link" target="_blank">View PlayStore <i class="fa-solid fa-arrow-right"></i></a>
+                            <span class="portfolio-card-deliverables">Connection UX / Layout</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item: STV -->
+                <div class="portfolio-card" data-category="product">
+                    <div class="portfolio-card-img-wrapper">
+                        <img class="portfolio-card-img" src="assets/images/port/stv.jpg" alt="STV app screen">
+                        <span class="portfolio-card-badge">Client Project</span>
+                    </div>
+                    <div class="portfolio-card-content">
+                        <div class="portfolio-card-stats" style="color: #3b82f6;">
+                            <span>Influencer Marketing</span>
+                        </div>
+                        <h3 class="portfolio-card-title">STV - Unbiased Reviews</h3>
+                        <p class="portfolio-card-desc">Conceptualized and structured mobile dashboards to provide authentic reviews and rating boards curated by designated experts.</p>
+                        <div class="portfolio-card-footer">
+                            <span class="portfolio-card-link" style="cursor: default;">Mobile UI Case Study</span>
+                            <span class="portfolio-card-deliverables">User Research / UI Design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item: Shout -->
+                <div class="portfolio-card" data-category="product">
+                    <div class="portfolio-card-img-wrapper">
+                        <img class="portfolio-card-img" src="assets/images/port/shout.jpg" alt="Shout app screen">
+                        <span class="portfolio-card-badge">Client Project</span>
+                    </div>
+                    <div class="portfolio-card-content">
+                        <div class="portfolio-card-stats" style="color: #3b82f6;">
+                            <span>Social Commerce</span>
+                        </div>
+                        <h3 class="portfolio-card-title">SHout Social Connection</h3>
+                        <p class="portfolio-card-desc">Redesigned call interfaces, video chat systems, and text messengers to match social media behaviors and facilitate video e-commerce features.</p>
+                        <div class="portfolio-card-footer">
+                            <span class="portfolio-card-link" style="cursor: default;">Mobile UI Case Study</span>
+                            <span class="portfolio-card-deliverables">Video Chat UX / UI</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-4 text-center" style="background: #080B11; color: #718096; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05);">
+        <div class="container">
+            <p class="m-0">© ROHIT SINGH - UI/UX Portfolio</p>
+        </div>
+    </footer>
+
+    <!-- Filter Mechanism Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const buttons = document.querySelectorAll(".filter-btn");
+            const cards = document.querySelectorAll(".portfolio-card");
+
+            buttons.forEach(button => {
+                button.addEventListener("click", function() {
+                    buttons.forEach(btn => btn.classList.remove("active"));
+                    this.classList.add("active");
+
+                    const filter = this.getAttribute("data-filter");
+
+                    cards.forEach(card => {
+                        if (filter === "all") {
+                            card.style.display = "flex";
+                        } else {
+                            const category = card.getAttribute("data-category");
+                            if (category === filter) {
+                                card.style.display = "flex";
+                            } else {
+                                card.style.display = "none";
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,4896 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Option Trader &mdash; Case Study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.18/dist/lenis.css">
+  <style>
+    :root {
+      --bg: #FFFFFF;
+      --surface: #FFFFFF;
+      --ink: #0F172A;
+      --text2: #475569;
+      --text3: #0F172A;
+
+      --muted: #94A3B8;
+      --border: #E2E8F0;
+      --accent: #0F172A;
+      --accent-light: #F1F5F9;
+      --accent-text: #0F172A;
+      --success: #0F172A;
+      --success-bg: #F8FAFC;
+      --warning: #0F172A;
+      --warning-bg: #F8FAFC;
+      --danger: #0F172A;
+      --danger-bg: #F8FAFC;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Lexend', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 950px;
+      background-image: url(img/single-bg.jpg);
+      background-position: top center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      z-index: -1;
+      pointer-events: none;
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.75) 55%, rgba(0, 0, 0, 0) 100%);
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.75) 55%, rgba(0, 0, 0, 0) 100%);
+    }
+
+    h1,
+    h2,
+    h3,
+    .display {
+      font-family: 'Lexend', sans-serif;
+      letter-spacing: -0.02em;
+      color: #0F172A;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text2);
+    }
+
+    .lead {
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* NAV */
+    .site-header {
+      position: sticky;
+      top: 0;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+
+    nav {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 22px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Lexend', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 30px;
+      font-size: 13px;
+      color: var(--text2);
+    }
+
+    .navlinks .active {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent);
+    }
+
+    /* HERO */
+    .hero {
+      padding: 64px 0 0;
+    }
+
+    .tags {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+
+    .tag.filled {
+      background: var(--accent-light);
+      color: var(--accent-text);
+    }
+
+    .tag.plain {
+      color: var(--text2);
+      padding-left: 0;
+    }
+
+    .hero-logo {
+      margin-bottom: 28px;
+    }
+
+    .hero-logo img {
+      height: 48px;
+      width: auto;
+      display: block;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      line-height: 1.15;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      /* max-width: 880px; */
+      margin: 0 0 34px 0;
+      color: #222428;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px;
+      margin-top: 36px;
+      margin-bottom: 48px;
+    }
+
+    .meta-row .m-label {
+      font-size: 14px;
+      font-weight: 800;
+      color: #0066df;
+      margin: 0 0 8px 0;
+    }
+
+    .meta-row .m-value {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0 0 6px 0;
+    }
+
+    .meta-row .m-sub {
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: #64748b;
+      margin: 0;
+    }
+
+    .box1 {
+      background: #fff;
+      padding: 12px;
+      border-radius: 12px;
+      border: 2px solid #efefef;
+    }
+
+    @media (max-width: 900px) {
+      .hero-logo {
+        margin-bottom: 20px;
+      }
+
+      .hero-logo img {
+        height: 38px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+        margin-bottom: 44px;
+      }
+
+      .meta-row {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    .hero-visual {
+      border-radius: 8px;
+      margin-bottom: 64px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /*  .hero-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg, rgba(10,10,15,0.65) 0%, rgba(10,10,15,0.15) 45%, rgba(10,10,15,0) 70%);pointer-events:none;}*/
+    .hero-overlay-text {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 22px;
+      z-index: 2;
+      color: #fff;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      margin: 0;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+      line-height: 1.25;
+    }
+
+    @media (max-width:900px) {
+      .persona-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width:640px) {
+      .hero-overlay-text {
+        font-size: 15px;
+        left: 16px;
+        bottom: 14px;
+      }
+    }
+
+    section {
+      padding: 56px 0;
+      /* border-top: 1px solid var(--border); */
+    }
+
+    section p.lead {
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto 32px;
+      text-align: center;
+    }
+
+    section h2 {
+      font-size: 24px;
+      font-weight: 800;
+      margin: 0 0 8px;
+      text-align: center;
+    }
+
+    /* OVERVIEW */
+    .overview-fullwidth {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      background: aliceblue;
+      display: none;
+      /* box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 -1px 0 rgba(15, 23, 42, 0.06); */
+    }
+
+    .overview-container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 32px;
+      box-sizing: border-box;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .overview-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    .overview-client-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 28px 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .overview-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(240, 1, 59, 0.18);
+      border: 1px solid rgba(240, 1, 59, 0.4);
+      color: #FECDD3;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    .overview-company {
+      font-size: 24px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin: 0 0 8px 0;
+      letter-spacing: -0.5px;
+    }
+
+    .overview-location {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      color: #A1A1AA;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .overview-location svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: #F87171;
+      stroke-width: 2;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .overview-meta-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 20px;
+    }
+
+    .overview-meta-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .overview-meta-label {
+      color: #71717A;
+    }
+
+    .overview-meta-val {
+      color: #F4F4F5;
+      font-weight: 600;
+    }
+
+    .overview-content-head {
+      margin-bottom: 24px;
+    }
+
+    .overview-tagline {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #F87171;
+      margin-bottom: 8px;
+    }
+
+    .overview-title {
+      font-size: 38px;
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1.2;
+      margin: 0 0 8px 0;
+      letter-spacing: -0.8px;
+    }
+
+    .overview-subtitle {
+      font-size: 18px;
+      font-weight: 600;
+      color: #FECDD3;
+      margin: 0 0 20px 0;
+      line-height: 1.4;
+    }
+
+    .overview-desc {
+      font-size: 15px;
+      line-height: 1.75;
+      color: #D4D4D8;
+      margin-bottom: 32px;
+    }
+
+    .overview-pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .pillar-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 18px 20px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .pillar-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(240, 1, 59, 0.4);
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .pillar-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #F4F4F5;
+      margin: 0 0 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pillar-icon {
+      color: #f0013b;
+    }
+
+    .pillar-desc {
+      font-size: 12px;
+      color: #A1A1AA;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* APP PERSONAS / TARGET USERS SECTION */
+    .personas-section {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      padding: 56px 0 44px;
+      background-color: #ffffff;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .personas-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('img/pattern-bg.png');
+      background-repeat: repeat;
+      background-size: auto;
+      background-position: center;
+      opacity: 0.75;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .personas-section h2 {
+      position: relative;
+      z-index: 2;
+      font-size: 32px;
+      font-weight: 800;
+      color: #1a365d;
+      margin: 0 0 12px 0;
+      text-align: center;
+    }
+
+    .personas-section .lead {
+      position: relative;
+      z-index: 2;
+      font-size: 16px;
+      color: var(--text2);
+      max-width: 650px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .personas-grid {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 28px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    @media (max-width: 768px) {
+      .personas-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 48px;
+      }
+    }
+
+    .persona-item {
+      flex: 0 1 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .persona-illus-placeholder {
+      width: 112px;
+      height: 112px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 28px;
+      margin-bottom: 16px;
+      position: relative;
+      background: #f8fafc;
+      box-shadow: inset 0 -4px 12px rgba(0, 0, 0, 0.02), 0 8px 24px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+    }
+
+    .persona-illus-placeholder::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 28px;
+      padding: 1.5px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(0, 0, 0, 0.04));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .persona-illus-placeholder i {
+      font-size: 44px;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Gradient definitions for persona classes */
+    .persona-item.admin .persona-illus-placeholder i {
+      background-image: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    }
+
+    .persona-item.agent .persona-illus-placeholder i {
+      background-image: linear-gradient(135deg, #10b981, #047857);
+    }
+
+    .persona-item.student .persona-illus-placeholder i {
+      background-image: linear-gradient(135deg, #ec4899, #be185d);
+    }
+
+    .persona-item.employee .persona-illus-placeholder i {
+      background-image: linear-gradient(135deg, #06b6d4, #0891b2);
+    }
+
+    .persona-item.visa .persona-illus-placeholder i {
+      background-image: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    }
+
+    .persona-illus-badge {
+      position: absolute;
+      bottom: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 2px 6px;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    }
+
+    .persona-item-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1e293b;
+      margin: 0 0 6px 0;
+    }
+
+    .persona-item-desc {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text2);
+      max-width: 290px;
+      margin: 0;
+    }
+
+    /* ARCHITECTURE */
+    .arch-section-fullwidth {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      background: #f7f7fa;
+      padding: 56px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      box-sizing: border-box;
+    }
+
+    .arch-container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 32px;
+      box-sizing: border-box;
+    }
+
+    .arch-grid {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      gap: 24px;
+      margin-top: 32px;
+      padding-bottom: 16px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+      scroll-snap-type: x mandatory;
+    }
+
+    .arch-grid::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .arch-grid::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .arch-grid::-webkit-scrollbar-thumb {
+      background-color: var(--border);
+      border-radius: 10px;
+    }
+
+    .arch-card {
+      flex: 0 0 280px;
+      min-width: 280px;
+      scroll-snap-align: start;
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .arch-card:hover {
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+      border-color: rgba(240, 1, 59, 0.2);
+      transform: translateY(-3px);
+    }
+
+    .arch-card .head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .arch-card .icon {
+      display: none;
+    }
+
+    .arch-card:hover .icon {
+      background: var(--accent);
+      color: #FFFFFF;
+    }
+
+    .arch-card .head p {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text3);
+      font-family: 'Be Vietnam Pro', sans-serif;
+      margin: 0;
+    }
+
+    .arch-card ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .arch-card li {
+      font-size: 12.5px;
+      color: var(--text2);
+      padding: 4px 0;
+      position: relative;
+      padding-left: 16px;
+      transition: color 0.2s ease;
+    }
+
+    .arch-card li:hover {
+      color: var(--ink);
+    }
+
+    .arch-card li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.5;
+    }
+
+    /* Style enhancements for the Future/Roadmap cards */
+    .arch-card.future {
+      background: #FFFFFF;
+      border: 1px dashed var(--accent);
+      box-shadow: 0 4px 12px rgba(240, 1, 59, 0.02);
+    }
+
+    .arch-card.future::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--accent);
+    }
+
+    .arch-card.future:hover {
+      border-style: solid;
+      box-shadow: 0 12px 30px rgba(240, 1, 59, 0.08);
+    }
+
+    .arch-card.future .icon {
+      background: rgba(240, 1, 59, 0.1);
+      color: var(--accent);
+    }
+
+    .arch-card.future .head p {
+      color: var(--ink);
+    }
+
+    .arch-card.future li {
+      color: var(--text2);
+    }
+
+    .arch-card.future li::before {
+      background: var(--accent);
+      opacity: 0.6;
+    }
+
+    .arch-badge {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      font-size: 9px;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 20px;
+      background: rgba(240, 1, 59, 0.08);
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+
+    .arch-card ul ul {
+      margin-top: 4px;
+      padding-left: 14px;
+    }
+
+    .arch-card ul ul li {
+      font-size: 11px;
+    }
+
+    .arch-card ul ul li::before {
+      width: 4px;
+      height: 4px;
+      background: var(--border);
+      opacity: 0.7;
+    }
+
+    .li-toggle {
+      padding: 0 !important;
+    }
+
+    .li-toggle::before {
+      display: none;
+    }
+
+    .li-toggle details {
+      width: 100%;
+    }
+
+    .li-toggle summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px 0;
+      font-size: 12.5px;
+      color: var(--text2);
+      transition: color 0.2s ease;
+    }
+
+    .li-toggle summary:hover {
+      color: var(--ink);
+    }
+
+    .li-toggle summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .li-arrow {
+      position: relative;
+      width: 8px;
+      height: 8px;
+      flex-shrink: 0;
+      margin-left: 8px;
+    }
+
+    .li-arrow::before {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 0;
+      width: 7px;
+      height: 7px;
+      border-right: 1.5px solid var(--muted);
+      border-bottom: 1.5px solid var(--muted);
+      transform: rotate(45deg);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .li-toggle summary:hover .li-arrow::before {
+      border-color: var(--accent);
+    }
+
+    .li-toggle details[open] .li-arrow::before {
+      transform: rotate(225deg);
+      top: 5px;
+    }
+
+    .li-toggle ul {
+      margin-top: 4px;
+      padding-left: 14px;
+    }
+
+    /* KEY SCREENS GRID */
+    .screens-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .screen-col {
+      text-align: center;
+    }
+
+    .screen-shot {
+      width: 100%;
+      max-width: none;
+      height: auto;
+      border-radius: 16px;
+      border: 2px solid var(--border);
+      display: block;
+      margin: 0 auto 10px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    }
+
+    .screen-label {
+      font-size: 12px;
+      font-weight: 700;
+      margin: 0;
+      color: var(--ink);
+    }
+
+    .screen-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin: 2px 0 0;
+    }
+
+    @media (max-width:720px) {
+      .screens-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* DESIGN APPROACH ACCORDION */
+    .accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .accordion details {
+      background: var(--surface);
+      /* border: 1px solid var(--border); */
+      border-radius: 14px;
+      padding: 4px 20px;
+    }
+
+    .accordion summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 20px 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .accordion summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .accordion summary .q-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--surface);
+      background: var(--text3);
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin-right: 12px;
+      display: inline-block;
+      letter-spacing: 0.5px;
+    }
+
+    .accordion summary .q-num::after {
+      content: "";
+    }
+
+    .accordion summary .q-title {
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--text3);
+    }
+
+    .illo-toggle {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+
+    .accordion-illo {
+      height: 44px;
+      width: auto;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 640px) {
+      .accordion-illo {
+        display: none;
+      }
+    }
+
+    .accordion .plus {
+      position: relative;
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .accordion .plus::before,
+    .accordion .plus::after {
+      content: "";
+      position: absolute;
+      background: var(--ink);
+      border-radius: 1px;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .accordion .plus::before {
+      width: 16px;
+      height: 2px;
+      top: 7px;
+      left: 0;
+    }
+
+    .accordion .plus::after {
+      width: 2px;
+      height: 16px;
+      top: 0;
+      left: 7px;
+    }
+
+    .accordion details[open] .plus::after {
+      transform: rotate(90deg);
+      opacity: 0;
+    }
+
+    .accordion .panel {
+      padding: 0 4px 24px 4px;
+      border-top: 1px solid var(--border);
+      margin-top: 4px;
+      padding-top: 16px;
+    }
+
+    .accordion .panel>p {
+      font-size: 13px;
+      color: var(--link);
+      line-height: 1.7;
+      margin: 0 0 10px;
+    }
+
+    .accordion .panel ul {
+      margin: 0 0 10px;
+      padding-left: 18px;
+    }
+
+    .accordion .panel li {
+      font-size: 13px;
+      color: var(--link);
+      line-height: 1.7;
+      margin-bottom: 6px;
+    }
+
+    .accordion .panel ul ul {
+      margin-top: 6px;
+      margin-bottom: 0;
+    }
+
+    .wf-checklist {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 24px;
+      margin-top: 18px;
+    }
+
+    .wf-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .wf-item .wf-check {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      color: var(--accent-text);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .wf-item .wf-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .wf-item .wf-desc {
+      font-size: 12px;
+      color: var(--text2);
+      margin: 2px 0 0;
+    }
+
+    @media (max-width: 640px) {
+      .wf-checklist {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .accordion .panel strong {
+      color: var(--ink);
+    }
+
+    /* DISCOVERY COMPONENT STYLES */
+    .discovery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .discovery-card {
+      background: #F9FAFB;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .discovery-card:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04);
+      transform: translateY(-1px);
+      border-color: var(--accent);
+    }
+
+    .discovery-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .discovery-card-icon {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: rgba(240, 1, 59, 0.08);
+      color: var(--accent);
+      font-size: 18px;
+    }
+
+    .discovery-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: #E4E7EB;
+      color: var(--text2);
+    }
+
+    .discovery-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 6px 0;
+    }
+
+    .discovery-card-desc {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .verticals-container {
+      margin-top: 24px;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      margin-bottom: 24px;
+    }
+
+    .verticals-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0 0 4px 0;
+    }
+
+    .verticals-subtitle {
+      font-size: 13px;
+      color: var(--text2);
+      margin: 0 0 16px 0;
+    }
+
+    .verticals-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .vertical-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .vertical-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 6px 12px rgba(240, 1, 59, 0.04);
+    }
+
+    .vertical-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .vertical-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: #FFFFFF;
+    }
+
+    .vertical-icon.cap {
+      background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+    }
+
+    .vertical-icon.visa {
+      background: linear-gradient(135deg, #4E54C8, #8F94FB);
+    }
+
+    .vertical-icon.coach {
+      background: linear-gradient(135deg, #11998E, #38EF7D);
+    }
+
+    .vertical-card h5 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .vertical-card p {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .crm-scroll-info-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      background: #F1F5F9;
+      color: #64748B;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-left: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 768px) {
+      .discovery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .verticals-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* CRM PIPELINE GRID STYLES */
+    .crm-pipeline-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .crm-pipeline-card {
+      background: #F9FAFB;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: relative;
+    }
+
+    .crm-pipeline-card:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04);
+      transform: translateY(-1px);
+      border-color: var(--accent);
+    }
+
+    .crm-pipeline-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .crm-pipeline-card-icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      background: rgba(240, 1, 59, 0.08);
+      color: var(--accent);
+      font-size: 16px;
+    }
+
+    .crm-pipeline-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: #E4E7EB;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .crm-pipeline-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 4px 0;
+    }
+
+    .crm-pipeline-card-desc {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* OPPORTUNITY GRID STYLES */
+    .opportunity-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .opportunity-card {
+      /* background: #F9FAFB; */
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .opportunity-card:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04);
+      transform: translateY(-1px);
+      border-color: var(--accent);
+    }
+
+    .opportunity-card-icon {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      /* justify-content: center; */
+      border-radius: 8px;
+      /* background: rgba(240, 1, 59, 0.08); */
+      color: var(--accent);
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .opportunity-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 6px 0;
+    }
+
+    .opportunity-card-desc {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* FEATURES GRID STYLES */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .feature-card {
+      /* background: #F9FAFB; */
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feature-card:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04);
+      transform: translateY(-1px);
+      border-color: var(--accent);
+    }
+
+    .feature-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .feature-card-icon {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      /* justify-content: center; */
+      border-radius: 8px;
+      /* background: rgba(240, 1, 59, 0.08); */
+      color: var(--accent);
+      font-size: 18px;
+    }
+
+    .feature-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 12px;
+      background: rgba(240, 1, 59, 0.06);
+      color: var(--accent-text);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .feature-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 6px 0;
+    }
+
+    .feature-card-desc {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    @media (max-width: 992px) {
+      .crm-pipeline-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .crm-pipeline-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .opportunity-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .crm-scroll-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin: 4px 0 10px;
+    }
+
+    .crm-scroll {
+      overflow: hidden;
+      margin: 0 -4px;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+    }
+
+    .crm-scroll-track {
+      display: flex;
+      gap: 16px;
+      padding: 0 4px;
+      width: max-content;
+      animation: crm-marquee 32s linear infinite;
+    }
+
+    .crm-scroll:hover .crm-scroll-track {
+      animation-play-state: paused;
+    }
+
+    .crm-shot-col {
+      flex-shrink: 0;
+      width: 280px;
+    }
+
+    .screen-thumb-decor {
+      cursor: default;
+    }
+
+    @keyframes crm-marquee {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    .crm-shot {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+      display: block;
+    }
+
+    .crm-shot-caption {
+      font-size: 11px;
+      color: var(--text2);
+      margin: 8px 0 0;
+    }
+
+    /* PERSONA HIERARCHY */
+    .hub {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+
+    .hub-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    }
+
+    .hub-card .icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .hub-card p {
+      margin: 0;
+    }
+
+    .hub-card .t {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .hub-card .s {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .connector {
+      display: flex;
+      justify-content: center;
+      margin: 6px 0;
+    }
+
+    .persona-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 32px;
+      align-items: stretch;
+    }
+
+    .persona-card {
+      width: 100%;
+      /* background: #fff2f8; */
+      border: none;
+      border-radius: 24px;
+      padding: 0;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      margin-top: 50px;
+      /* Room for the popping image */
+    }
+
+    .persona-card>* {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .persona-card .head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+
+    .persona-card .ico {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-text);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .persona-card .head p {
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.3;
+      margin: 0;
+      color: #111;
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+
+    .persona-card .desc {
+      font-size: 15px;
+      color: #4B5563;
+      line-height: 1.6;
+      margin: 0 0 16px;
+    }
+
+    .persona-card .feat {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1F2937;
+      margin: 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .persona-card .feat:last-child {
+      margin-bottom: 24px;
+    }
+
+    .persona-photo {
+      width: calc(100% - 48px);
+      height: 200px;
+      object-fit: cover;
+      object-position: top;
+      margin: -40px auto 0 auto;
+      /* Pops out of the top */
+      background: var(--accent-light);
+      border-radius: 16px;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+      /* Adds a 3D float effect */
+    }
+
+    /* DASHBOARDS */
+    .dash-row {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .dash-col {
+      text-align: center;
+    }
+
+    .dash-phone {
+      width: 200px;
+      background: var(--surface);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      padding: 14px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .dash-phone .top {
+      background: var(--accent);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    .dash-phone .top .l1 {
+      font-size: 11px;
+      color: #FECDD3;
+      margin: 0 0 2px;
+    }
+
+    .dash-phone .top .l2 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      margin: 0;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .kpi {
+      background: #F4F3F1;
+      border-radius: 8px;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .kpi .num {
+      font-size: 15px;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .kpi .lbl {
+      font-size: 9px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .dash-caption {
+      font-size: 12px;
+      font-weight: 700;
+      margin: 10px 0 0;
+    }
+
+    .dash-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin: 2px 0 0;
+    }
+
+    /* MODERN TIMELINE STYLES */
+    .timeline {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 24px;
+      padding-bottom: 24px;
+      padding-top: 24px;
+      margin-top: 8px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+    }
+
+    .timeline::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .timeline::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.03);
+      border-radius: 4px;
+    }
+
+    .timeline::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 4px;
+    }
+
+    .timeline::before {
+      display: none;
+    }
+
+    .step {
+      position: relative;
+      flex: 0 0 320px;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0;
+    }
+
+    .step:last-child {
+      margin-bottom: 0;
+    }
+
+    .step .num {
+      position: absolute;
+      left: 20px;
+      top: -21px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: 2px solid var(--text3);
+      color: var(--text3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 800;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      z-index: 2;
+      transition: all 0.3s ease;
+    }
+
+    .step:hover .num {
+      background: var(--accent);
+      color: #FFFFFF;
+      box-shadow: 0 6px 14px rgba(240, 1, 59, 0.25);
+      transform: scale(1.05);
+    }
+
+    .step-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 28px 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      transition: all 0.3s ease;
+      flex: 1;
+    }
+
+    .step-card:hover {
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+      border-color: rgba(240, 1, 59, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .step-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      /* background: rgba(240, 1, 59, 0.06); */
+      color: var(--text3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .step-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .step-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--ink);
+      margin: 0;
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+
+    .step-desc {
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: var(--text2);
+      margin: 0 0 16px 0;
+      max-width: 680px;
+    }
+
+    .step-desc:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Step Sub-grid / Deliverables Pill Layout */
+    .step-pills-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .step-pills-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .step-pill-card {
+      background: #F9FAFB;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .step-pill-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .step-pill-title i {
+      color: var(--accent);
+    }
+
+    .step-pill-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .step-pill-list li {
+      position: relative;
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--text2);
+      margin-bottom: 6px;
+      padding-left: 14px;
+    }
+
+    .step-pill-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .step-pill-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 7px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .workflow-grid {
+      display: flex;
+      gap: 40px;
+      align-items: stretch;
+      margin-top: 8px;
+    }
+
+    .workflow-timeline-col {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .workflow-video-col {
+      width: 280px;
+      flex-shrink: 0;
+    }
+
+    .ds-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .ds-col {
+      text-align: center;
+    }
+
+    .ds-shot {
+      width: 100%;
+      max-width: 720px;
+      height: auto;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+      display: block;
+      margin: 0 auto;
+    }
+
+    .ds-caption-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 12px 0 2px;
+    }
+
+    .ds-caption-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    @media (max-width: 720px) {
+      .ds-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .workflow-video-bg {
+      height: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      position: sticky;
+      top: 100px;
+    }
+
+    .video-frame {
+      width: 100%;
+      max-width: 220px;
+      aspect-ratio: 9 / 16;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      background: linear-gradient(160deg, var(--accent) 0%, #4A3585 100%);
+      margin: 0 auto;
+    }
+
+    .video-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .video-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .video-play-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 20px;
+    }
+
+    .video-placeholder p {
+      color: #EDE9FB;
+      font-size: 12px;
+      line-height: 1.6;
+      margin: 0;
+      max-width: 160px;
+    }
+
+    @media (max-width: 900px) {
+      .workflow-grid {
+        flex-direction: column;
+      }
+
+      .workflow-video-col {
+        width: 100%;
+      }
+
+      .workflow-video-bg {
+        position: static;
+        height: auto;
+        padding: 32px 20px;
+      }
+    }
+
+    /* DESIGN SYSTEM */
+    .status-chips {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 8px 14px;
+      font-size: 12px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .sys-grid {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .sys-card {
+      flex: 1;
+      min-width: 220px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    /* SCALE BANNER */
+    .banner {
+      background: var(--accent);
+      padding: 44px 32px;
+      text-align: center;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .banner h2 {
+      color: #fff;
+      font-size: 26px;
+      margin: 0 0 6px;
+    }
+
+    .banner p {
+      color: #C9BFF0;
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .chip-scroll {
+      background: var(--bg);
+      padding: 28px 0;
+      position: relative;
+      border-radius: 0 0 20px 20px;
+      overflow: hidden;
+    }
+
+    .chip-track {
+      display: flex;
+      gap: 10px;
+      padding: 0 32px;
+    }
+
+    .chip-track span {
+      flex-shrink: 0;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-text);
+      background: var(--accent-light);
+      padding: 8px 14px;
+      border-radius: 20px;
+    }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 16px;
+    }
+
+    .dots div {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+
+    .dots div:first-child {
+      background: var(--accent);
+    }
+
+    /* FOOTER */
+    footer {
+      background: #18181B;
+      border-radius: 20px;
+      margin: 56px 32px 40px;
+      padding: 56px 32px;
+    }
+
+    footer .eyebrow {
+      color: #A1A1AA;
+    }
+
+    footer h2 {
+      color: #fff;
+      font-size: 24px;
+      margin: 10px 0 28px;
+    }
+
+    footer hr {
+      border: none;
+      border-top: 1px solid #2E2E33;
+      margin-bottom: 24px;
+    }
+
+    .footer-cta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-cta p {
+      font-size: 13px;
+      color: #A1A1AA;
+      margin: 0;
+    }
+
+    .btn {
+      font-size: 13px;
+      font-weight: 600;
+      padding: 9px 16px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn.primary {
+      background: #fff;
+      color: #18181B;
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: #fff;
+      border: 1px solid #3F3F46;
+    }
+
+    @media (max-width:900px) {
+      .persona-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width:640px) {
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .navlinks {
+        gap: 16px;
+        font-size: 12px;
+      }
+    }
+
+    /* ZOOM / LIGHTBOX */
+    .screen-thumb {
+      position: relative;
+      cursor: zoom-in;
+      display: inline-block;
+    }
+
+    .screen-thumb .screen-shot {
+      transition: transform 0.15s ease;
+    }
+
+    .screen-thumb:hover .screen-shot {
+      transform: scale(1.02);
+    }
+
+    .zoom-badge {
+      position: absolute;
+      bottom: 20px;
+      right: 8px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(24, 24, 27, 0.65);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .zoom-badge svg {
+      width: 14px;
+      height: 14px;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 15, 17, 0.92);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      cursor: zoom-out;
+      padding: 32px;
+    }
+
+    .lightbox img {
+      max-width: min(92vw, 420px);
+      max-height: 80vh;
+      border-radius: 16px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .lightbox-caption {
+      color: #fff;
+      font-size: 14px;
+      margin-top: 16px;
+      font-weight: 600;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 24px;
+      right: 32px;
+      color: #fff;
+      font-size: 32px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .lightbox-nav svg {
+      width: 20px;
+      height: 20px;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .lightbox-prev {
+      left: 24px;
+    }
+
+    .lightbox-next {
+      right: 24px;
+    }
+
+    .lightbox-counter {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    .lightbox,
+    .lightbox *,
+    .screen-thumb,
+    .screen-thumb * {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+    }
+
+    .lightbox img {
+      -webkit-user-drag: none;
+      user-drag: none;
+      pointer-events: none;
+    }
+
+    /* Process Card UI */
+    .process-card-ui {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 32px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
+    }
+
+    .pc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    .pc-title-area {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .pc-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 20px;
+      font-weight: 700;
+      color: #DC2626;
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      border-radius: 10px;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .pc-title-text h3 {
+      font-size: 22px;
+      font-weight: 800;
+      margin: 0 0 6px;
+      color: var(--ink);
+    }
+
+    .pc-subtitle {
+      font-size: 15px;
+      color: var(--text2);
+      margin: 0;
+      display: inline-block;
+      font-style: italic;
+      position: relative;
+    }
+
+    .pc-subtitle::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 100%;
+      height: 2px;
+      background: #ef4444;
+      border-radius: 4px;
+      transform: rotate(-1deg);
+    }
+
+    .pc-illustration img {
+      max-width: 180px;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .pc-list {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .pc-item {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      position: relative;
+      padding: 24px 0;
+    }
+
+    .pc-item:first-child {
+      padding-top: 0;
+    }
+
+    .pc-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .pc-item:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--border);
+      opacity: 0.5;
+    }
+
+    .pc-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .pc-icon img {
+      width: 28px;
+      height: 28px;
+      opacity: 0.8;
+    }
+
+    .pc-text {
+      font-size: 15px;
+      color: var(--text2);
+      line-height: 1.6;
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .pc-text::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 5px;
+      bottom: 5px;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .pc-text strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    @media (max-width:640px) {
+      .pc-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+      }
+    }
+
+
+    /* ================================
+   ROLE ECOSYSTEM
+================================ */
+
+    .role-ecosystem {
+      padding: 80px 0;
+    }
+
+    .role-intro {
+      max-width: 760px;
+      margin: 0 auto 64px;
+      text-align: center;
+    }
+
+    .role-intro h2 {
+      margin-bottom: 18px;
+    }
+
+    .role-intro p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--text2);
+    }
+
+    .crm-hub {
+      position: relative;
+      margin: 0 auto 70px;
+      width: 520px;
+      max-width: 100%;
+    }
+
+    .crm-card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 34px;
+      text-align: center;
+      box-shadow: 0 14px 40px rgba(0, 0, 0, .05);
+    }
+
+    .crm-card::before {
+
+      content: "";
+
+      width: 68px;
+      height: 68px;
+
+      border-radius: 18px;
+
+      display: block;
+
+      margin: 0 auto 22px;
+
+      background: var(--accent-light);
+
+    }
+
+    .crm-card h3 {
+
+      font-size: 28px;
+
+      margin-bottom: 10px;
+
+      font-weight: 800;
+
+    }
+
+    .crm-card p {
+
+      color: var(--text2);
+
+      font-size: 16px;
+
+      margin-bottom: 28px;
+
+    }
+
+    .crm-tags {
+
+      display: flex;
+
+      justify-content: center;
+
+      flex-wrap: wrap;
+
+      gap: 10px;
+
+    }
+
+    .crm-tags span {
+
+      background: #F7F7FB;
+
+      border: 1px solid var(--border);
+
+      border-radius: 30px;
+
+      padding: 8px 16px;
+
+      font-size: 13px;
+
+      font-weight: 600;
+
+    }
+
+    .role-grid {
+
+      display: grid;
+
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 28px;
+
+      position: relative;
+
+    }
+
+    /* ==========================================================================
+   Monzo-Inspired Key Screens Section & Gallery
+   ========================================================================== */
+    .monzo-screens-section {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      /* background: #f7f7fa; */
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      box-sizing: border-box;
+      margin-top: 60px;
+      margin-bottom: 60px;
+    }
+
+    .monzo-header-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 32px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+    }
+
+    .monzo-header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .monzo-brand-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .monzo-app-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #2563EB, #1D4ED8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 22px;
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+      flex-shrink: 0;
+    }
+
+    .monzo-title-details h2 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text);
+      margin: 0 0 4px 0;
+      letter-spacing: -0.02em;
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+
+    .monzo-title-details p {
+      font-size: 15px;
+      color: #6B7280;
+      margin: 0;
+    }
+
+    .monzo-action-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .monzo-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid var(--border);
+      background: #FFFFFF;
+      color: var(--text);
+      font-family: inherit;
+    }
+
+    .monzo-btn:hover {
+      background: #F9FAFB;
+      border-color: #D1D5DB;
+      transform: translateY(-1px);
+    }
+
+    .monzo-btn.primary {
+      background: var(--text);
+      color: #FFFFFF;
+      border-color: var(--text);
+    }
+
+    .monzo-btn.primary:hover {
+      background: #111827;
+    }
+
+    .monzo-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #F3F4F6;
+    }
+
+    .monzo-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      background: #F3F4F6;
+      color: #374151;
+    }
+
+    .monzo-pill.pro-badge {
+      background: #2563EB;
+      color: #FFFFFF;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .monzo-pill.rating {
+      background: #FEF3C7;
+      color: #92400E;
+    }
+
+    /* Monzo Filter Navigation Bar */
+    .monzo-filter-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #E5E7EB;
+      padding-bottom: 12px;
+      margin-bottom: 32px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .monzo-tab-group {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+
+    .monzo-tab-btn {
+      font-size: 15px;
+      font-weight: 600;
+      color: #6B7280;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px 4px 14px 4px;
+      position: relative;
+      transition: color 0.2s ease;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+
+    .monzo-tab-btn:hover {
+      color: var(--text);
+    }
+
+    .monzo-tab-btn.active {
+      color: #111;
+      font-weight: 700;
+    }
+
+    .monzo-tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #111;
+      border-radius: 3px 3px 0 0;
+    }
+
+    .monzo-screen-counter {
+      font-size: 13px;
+      font-weight: 700;
+      color: #4B5563;
+      background: #F3F4F6;
+      padding: 6px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* Screen Grid & Card Cards */
+    .monzo-screens-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 1200px) {
+      .monzo-screens-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .monzo-screens-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 540px) {
+      .monzo-screens-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .monzo-screen-card {
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .monzo-screen-card:hover {
+      transform: translateY(-6px);
+      box-shadow: none;
+      border-color: transparent;
+    }
+
+    .monzo-card-img-box {
+      position: relative;
+      width: 100%;
+      background: #FFFFFF;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .monzo-screen-card:hover .monzo-card-img-box {
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+      border-color: rgba(0, 0, 0, 0.15);
+    }
+
+    .monzo-card-img-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.4s ease;
+      border-radius: 17px;
+    }
+
+    .monzo-screen-card:hover .monzo-card-img-box img {
+      transform: scale(1.02);
+    }
+
+    .monzo-card-tag {
+      display: none;
+    }
+
+    .monzo-card-body {
+      padding: 14px 8px 0 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      background: transparent;
+      text-align: center;
+      width: 100%;
+    }
+
+    .monzo-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text, #111827);
+      margin: 0;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      text-align: center;
+    }
+
+    .monzo-card-sub {
+      font-size: 13px;
+      color: #6B7280;
+      font-weight: 400;
+      margin: 0;
+      text-align: center;
+    }
+
+    /* Folder Explorer UI styles */
+    .folder-explorer {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 10px;
+      position: relative;
+    }
+
+    .explorer-nav-sticky {
+      position: sticky;
+      top: 68px;
+      /* Sticks right below the main navbar */
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      z-index: 8;
+      border-bottom: 1px solid #E5E7EB;
+      padding: 10px 0;
+      margin: 0 -32px;
+      padding-left: 32px;
+      padding-right: 32px;
+      transition: all 0.2s ease;
+    }
+
+    .explorer-nav-scroll {
+      width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .explorer-nav-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .explorer-main-tabs {
+      display: flex;
+      gap: 8px;
+      padding: 2px 0;
+    }
+
+    .explorer-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #4B5563;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      font-family: inherit;
+    }
+
+    .explorer-tab:hover {
+      color: #111827;
+      background: #F3F4F6;
+    }
+
+    .explorer-tab.active {
+      color: #FFFFFF;
+      background: var(--accent, #f0013b);
+      border-color: var(--accent, #f0013b);
+      box-shadow: 0 4px 10px rgba(240, 1, 59, 0.15);
+    }
+
+    .explorer-tab .count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      background: rgba(0, 0, 0, 0.06);
+      color: currentColor;
+      padding: 2px 6px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .explorer-tab.active .count {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .explorer-options-row {
+      display: flex;
+      justify-content: flex-end;
+      /* Align search bar to the right */
+      align-items: center;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .explorer-search-wrapper {
+      position: relative;
+      width: 320px;
+      max-width: 100%;
+    }
+
+    .explorer-search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9CA3AF;
+      font-size: 16px;
+      pointer-events: none;
+    }
+
+    #explorer-search {
+      width: 100%;
+      padding: 10px 16px 10px 40px;
+      font-size: 13px;
+      font-family: inherit;
+      color: #111827;
+      background: #FFFFFF;
+      border: 1px solid #D1D5DB;
+      border-radius: 12px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    #explorer-search:focus {
+      border-color: var(--accent, #f0013b);
+      box-shadow: 0 0 0 3px rgba(240, 1, 59, 0.1);
+    }
+
+    .explorer-sections-container {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      margin-top: 10px;
+    }
+
+    .explorer-folder-section {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      scroll-margin-top: 140px;
+      /* Offset for sticky navbars */
+    }
+
+    .explorer-section-header {
+      font-size: 20px;
+      font-weight: 800;
+      color: #111827;
+      margin: 16px 0 0px;
+      border-bottom: 1px solid #E5E7EB;
+      padding-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .explorer-section-header .folder-title-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .explorer-section-header .folder-title-box i {
+      color: var(--accent, #f0013b);
+    }
+
+    .explorer-section-header .folder-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: #9CA3AF;
+      background: #F3F4F6;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .explorer-sub-section {
+      border-left: 2px solid #E5E7EB;
+      padding-left: 20px;
+      margin-left: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      scroll-margin-top: 140px;
+    }
+
+    .explorer-sub-section-header {
+      font-size: 15px;
+      font-weight: 700;
+      color: #4B5563;
+      margin: 8px 0 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .explorer-sub-section-header .sub-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .explorer-sub-section-header .sub-title i {
+      color: #9CA3AF;
+    }
+
+    .explorer-sub-section-header .sub-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: #9CA3AF;
+    }
+
+    /* Screen card transition animation */
+    .monzo-screen-card {
+      animation: fadeInCard 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* DARK INTRO & BUSINESS GOALS SECTION */
+    .intro-dark-section {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      background: #00378d;
+      color: #FFFFFF;
+      padding: 80px 0;
+
+      margin-bottom: 64px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+      box-sizing: border-box;
+      text-align: left;
+    }
+
+    .intro-dark-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0;
+      box-sizing: border-box;
+      text-align: left;
+    }
+
+    .intro-dark-section .intro-tag {
+      font-family: 'Lexend', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin: 0 0 36px 0;
+      letter-spacing: -0.02em;
+      text-align: left;
+    }
+
+    .intro-dark-section .block-heading {
+      font-family: 'Lexend', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: #FFFFFF;
+      margin: 0 0 18px 0;
+      letter-spacing: -0.01em;
+    }
+
+    .intro-dark-section .text-content {
+      font-family: 'Lexend', sans-serif;
+      font-size: 15px;
+      line-height: 1.75;
+      color: #CBD5E1;
+      max-width: 900px;
+      margin-bottom: 20px;
+    }
+
+    .intro-dark-section .goals-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .intro-dark-section .goals-list li {
+      font-family: 'Lexend', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #CBD5E1;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    /* DISCOVER BANNER SECTION */
+    .discover-banner-section {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      background: #F8FAFC;
+      border-top: 1px solid #E2E8F0;
+      border-bottom: 1px solid #E2E8F0;
+      padding: 20px 0 16px;
+      margin-top: 32px;
+      margin-bottom: 0;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .discover-banner-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .discover-banner-section h2 {
+      font-family: 'Lexend', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #0F172A;
+      margin: 0;
+      letter-spacing: -0.01em;
+      text-align: center;
+    }
+
+    .process-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .process-step-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      overflow: hidden;
+    }
+
+    .process-step-card summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 24px 16px;
+    }
+
+    .process-step-card summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .process-step-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      flex: 1 1 auto;
+      min-width: 0;
+      margin: 0;
+    }
+
+    .process-step-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      background: #00378d;
+      border: 1px solid #CBD5E1;
+      padding: 3px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .process-step-card h4 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #0F172A;
+      margin: 0;
+      line-height: 1.35;
+    }
+
+    .process-step-card .plus {
+      position: relative;
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      margin-left: 8px;
+    }
+
+    .process-step-card .plus::before,
+    .process-step-card .plus::after {
+      content: "";
+      position: absolute;
+      background: #0F172A;
+      border-radius: 1px;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .process-step-card .plus::before {
+      width: 16px;
+      height: 2px;
+      top: 7px;
+      left: 0;
+    }
+
+    .process-step-card .plus::after {
+      width: 2px;
+      height: 16px;
+      top: 0;
+      left: 7px;
+    }
+
+    .process-step-card[open] .plus::after {
+      transform: rotate(90deg);
+      opacity: 0;
+    }
+
+    .process-step-list {
+      list-style: none;
+      padding: 0 24px 20px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border-top: 1px solid #E2E8F0;
+      padding-top: 16px;
+    }
+
+    .process-step-list li {
+      font-size: 14px;
+      color: #475569;
+      line-height: 1.6;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .process-step-list li>span:first-child {
+      color: #0F172A;
+      font-weight: bold;
+    }
+
+    /* ─── PRODUCTS FLOW CAROUSEL ─── */
+    .pf-fullwidth-bg {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      background: #F3F4F6;
+      padding: 56px 32px;
+      box-sizing: border-box;
+      border-top: 1px solid #E2E8F0;
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    .pf-fullwidth-inner {
+      max-width: 1116px;
+      margin: 0 auto;
+    }
+
+    .pf-carousel-wrapper {
+      --pf-peek: calc(10% + 20px);
+      --pf-pad-top: 0px;
+      position: relative;
+      padding: var(--pf-pad-top) 0 44px;
+      max-width: 1180px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .pf-carousel-track-container {
+      overflow: visible;
+    }
+
+    .pf-carousel-track {
+      display: flex;
+      gap: 20px;
+      transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+      will-change: transform;
+    }
+
+    /* Slide = full container width minus the peek amount,
+       so the next slide always peeks at the right. */
+    .pf-slide {
+      flex: 0 0 calc(100% - var(--pf-peek));
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    .pf-slide-image-wrap {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #E2E8F0;
+      background: #F1F5F9;
+      box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
+      position: relative;
+    }
+
+    .pf-slide-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .pf-slide-content {
+      padding: 22px 4px 8px;
+    }
+
+    .pf-slide-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: #94A3B8;
+      display: block;
+      margin-bottom: 5px;
+      letter-spacing: 0.06em;
+    }
+
+    .pf-slide-title {
+      font-family: 'Lexend', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #0F172A;
+      margin: 0 0 8px 0;
+      letter-spacing: -0.01em;
+    }
+
+    .pf-slide-desc {
+      font-family: 'Lexend', sans-serif;
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: #475569;
+      margin: 0;
+    }
+
+    .pf-carousel-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    /* Floating nav arrows — vertically centered over the image via JS */
+    .pf-nav-float {
+      position: absolute;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid #E2E8F0;
+      background: #FFFFFF;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.18);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    }
+
+    .pf-nav-float svg {
+      width: 18px;
+      height: 18px;
+      color: #0F172A;
+    }
+
+    .pf-nav-float:hover {
+      background: #0F172A;
+      border-color: #0F172A;
+      transform: scale(1.06);
+    }
+
+    .pf-nav-float:hover svg {
+      color: #FFFFFF;
+    }
+
+    .pf-nav-float:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .pf-nav-float-prev {
+      left: 16px;
+    }
+
+    .pf-nav-float-next {
+      right: 16px;
+    }
+
+    .pf-dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .pf-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #CBD5E1;
+      transition: background 0.25s, transform 0.25s;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+    }
+
+    .pf-dot.active {
+      background: #0F172A;
+      transform: scale(1.4);
+    }
+
+    .backend-merged-section,
+    .section-merged-group {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      /* margin-top: 28px; */
+      /* border-top: 1px solid #E2E8F0; */
+      /* border-bottom: 1px solid #E2E8F0; */
+      background: #F8FAFC;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .backend-merged-section>.discover-banner-section,
+    .section-merged-group>.discover-banner-section {
+      width: auto;
+      position: static;
+      left: auto;
+      right: auto;
+      margin: 0;
+      background: antiquewhite;
+      border: none;
+      padding: 24px 0 24px;
+      margin-bottom: 0;
+      box-sizing: border-box;
+    }
+
+    .backend-merged-section>.discover-banner-section .discover-banner-container,
+    .section-merged-group>.discover-banner-section .discover-banner-container {
+      padding: 0;
+    }
+
+    .backend-merged-section>section:not(.discover-banner-section),
+    .section-merged-group>section:not(.discover-banner-section) {
+      width: min(100%, 1000px);
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      left: auto;
+      right: auto;
+      background: transparent;
+      border-top: none;
+      padding: 48px 0 48px;
+      box-sizing: border-box;
+    }
+
+    .backend-merged-section>.pf-fullwidth-bg,
+    .section-merged-group>.pf-fullwidth-bg {
+      width: 100%;
+      position: relative;
+      left: auto;
+      right: auto;
+      margin: 0;
+      background: #F3F4F6;
+      border-top: 1px solid #E2E8F0;
+      padding: 18px 32px 48px;
+      box-sizing: border-box;
+    }
+
+    .section-merged-group .app-grid-section {
+      width: min(100%, 1240px);
+      max-width: 1240px;
+      padding: 18px 0 48px;
+    }
+
+    @media (max-width: 900px) {
+      .pf-carousel-wrapper {
+        --pf-peek: calc(10% + 20px);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .pf-carousel-wrapper {
+        --pf-peek: calc(15% + 20px);
+      }
+    }
+  
+    /* APP CASE STUDY MODULES */
+    .app-modules { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+    .app-module { padding: 88px 0; border-bottom: 1px solid var(--border); }
+    .app-module:last-child { border-bottom: 0; }
+    .app-module-intro { display:grid; grid-template-columns: 0.72fr 1.28fr; gap:64px; align-items:start; margin-bottom:42px; }
+    .app-module-kicker { font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; letter-spacing:.08em; color:#0066df; text-transform:uppercase; margin:0 0 12px; }
+    .app-module h3 { font-size:30px; line-height:1.25; font-weight:800; color:#0f172a; margin:0 0 14px; }
+    .app-module-intro p { font-size:15px; line-height:1.7; color:#475569; margin:0; max-width:620px; }
+    .app-module-points { margin:0; padding:0; list-style:none; display:grid; gap:12px; }
+    .app-module-points li { position:relative; padding-left:18px; font-size:13.5px; line-height:1.6; color:#475569; }
+    .app-module-points li::before { content:'•'; position:absolute; left:0; top:0; color:#0066df; font-weight:800; }
+    .app-screens { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; align-items:start; }
+    .app-screen { min-height:360px; border:1px dashed #CBD5E1; border-radius:18px; background:linear-gradient(180deg,#F8FAFC,#F1F5F9); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; position:relative; overflow:hidden; }
+    .app-screen::before { content:''; width:72%; height:72%; border:1px solid #E2E8F0; border-radius:28px; background:#fff; position:absolute; }
+    .app-screen-content { position:relative; z-index:1; }
+    .app-screen-icon { width:42px; height:42px; border-radius:12px; background:#EFF6FF; color:#0066df; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; font-size:20px; }
+    .app-screen strong { display:block; font-size:13px; color:#0f172a; margin-bottom:5px; }
+    .app-screen span { display:block; font-size:10.5px; color:#94A3B8; }
+    .app-screen-note { margin-top:10px; font-family:'JetBrains Mono',monospace; font-size:9px; color:#94A3B8; text-transform:uppercase; letter-spacing:.05em; }
+    .app-module-story { max-width: 680px; }
+    .app-module-story p { font-size:15px; line-height:1.8; color:#475569; margin:0 0 14px; }
+    .app-module-story p:last-child { margin-bottom:0; }
+    .app-module-story strong { color:#0F172A; font-weight:700; }
+    .app-screens-2 { grid-template-columns:repeat(2, minmax(0, 1fr)); max-width:760px; }
+    .app-screens-3 { grid-template-columns:repeat(3, minmax(0, 1fr)); }
+    .app-screens-4 { grid-template-columns:repeat(4, minmax(0, 1fr)); }
+    .app-screen { min-height:420px; }
+    @media(max-width:900px){ .app-screens-3,.app-screens-4{grid-template-columns:repeat(2,1fr)} }
+    @media(max-width:600px){ .app-screens-2,.app-screens-3,.app-screens-4{grid-template-columns:1fr 1fr}.app-screen{min-height:300px}.app-module-story p{font-size:14px;line-height:1.7} }
+
+    @media(max-width:900px){ .app-module-intro{grid-template-columns:1fr;gap:28px}.app-screens{grid-template-columns:repeat(2,1fr)} }
+    @media(max-width:600px){ .app-modules{padding:0 20px}.app-module{padding:56px 0}.app-module h3{font-size:25px}.app-screens{grid-template-columns:1fr 1fr;gap:12px}.app-screen{min-height:300px} }
+
+  </style>
+
+
+</head>
+
+<body>
+
+  <header class="site-header">
+    <nav>
+      <a href="index.html" class="back-link">
+        <i class="ti ti-arrow-left" style="font-size: 18px;"></i>
+        <span>Go back</span>
+      </a>
+    </nav>
+  </header>
+
+  <div class="wrap">
+
+    <!-- HERO SECTION -->
+    <div class="hero" style="padding-top: 48px;">
+      <div class="tags">
+        <span class="tag" style="background: #0066df; color: #fff; font-weight: 700; border: 1px solid #E2E8F0;">CASE
+          STUDY</span>
+        <span class="tag plain" style="color: #000;">EDTECH &middot; FINTECH</span>
+      </div>
+
+
+      <!-- 1. Logo -->
+      <!-- <div class="hero-logo">
+        <img src="img/mapr/logo.svg" alt="MAPR Logo">
+      </div> -->
+
+      <h1 style="color: #0F172A; font-size: 44px; font-weight: 600; letter-spacing: -0.03em;">
+        An EdTech platform for stock & options trading education across NSE, BSE & MCX.
+      </h1>
+      <!-- <p
+        style="font-size: 18px; font-weight: 400; color: #64748B; margin-top: -8px; margin-bottom: 40px; line-height: 1.5;">
+       
+      </p> -->
+      <!-- HERO VISUAL IMAGE -->
+      <div class="hero-visual" style="border: 1px solid #E2E8F0; border-radius: 12px; overflow: hidden;">
+        <img src="img/option/hero2.jpg" alt="The Option Trader Platform"
+          style="width:100%; height:auto; display:block;">
+      </div>
+
+
+      <div class="meta-row">
+        <!-- Column 1: Role -->
+        <div class="box1">
+          <p class="m-label">My Role</p>
+          <p class="m-value">Team Lead &middot; Senior Product Designer</p>
+          <p class="m-sub">UX Research &middot; UI Design &middot; Full-Stack Development (Backend + Web) &middot;
+            Architecture</p>
+        </div>
+
+        <!-- Column 2: Platform -->
+        <div class="box1">
+          <p class="m-label">Deliver</p>
+          <p class="m-value">Web App &middot; Mobile App &middot; Admin Panel</p>
+          <p class="m-sub">Duration : 2 Months (March -April 2026)</p>
+        </div>
+
+        <!-- Column 3: Tools -->
+        <div class="box1">
+          <p class="m-label">Tools &amp; Tech</p>
+          <p class="m-value">Figma, Google Antigravity</p>
+          <!-- <p class="m-sub">UI Design &middot; Agentic AI Workflows &middot; Web App &amp; API Development</p> -->
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- SECTION 1: OVERVIEW -->
+    <div class="overview-fullwidth">
+      <section class="intro-statement" style="padding: 60px 0; max-width: 1000px; margin: 0 auto; text-align: left;">
+        <h4
+          style="font-family: 'Lexend', sans-serif; font-size: 13px; font-weight: 700; color: #64748B; margin: 0 0 16px 0; text-transform: uppercase; letter-spacing: 0.08em;">
+          Overview
+        </h4>
+        <p style="font-size: 20px; line-height: 1.6; font-weight: 400; margin: 0 0 28px 0; color: #0F172A;">
+          <strong>The Option Trader</strong> is an EdTech platform built specifically for the stock/options trading
+          education niche &mdash; a space where existing platforms are either generic course marketplaces (with no
+          trading
+          context) or trading apps with no structured learning path.
+        </p>
+
+      </section>
+    </div>
+
+
+    <!-- SECTION 2: INTRO & PROBLEM STATEMENT & GOAL (DARK SECTION) -->
+    <section class="intro-dark-section" style="margin-bottom: 0;">
+      <div class="intro-dark-container">
+        <h2 class="intro-tag"
+          style="font-size: 13px; letter-spacing: 0.08em; color: #cde2ff; text-transform: uppercase;">Intro</h2>
+
+        <!-- INTRO / PROJECT OVERVIEW -->
+        <div style="margin-bottom: 40px;">
+          <h3 class="block-heading" style="font-size: 22px; color: #FFFFFF; font-weight: 700;">Project Overview</h3>
+          <p
+            style="font-family: 'Lexend', sans-serif; font-size: 16px; line-height: 1.75; color: #CBD5E1; margin: 0; max-width: 900px;">
+            A unified trading platform that helps new and intermediate traders <strong style="color: #FFFFFF;">Learn
+              &rarr; Practice &rarr; Get Mentored &rarr; Go Live</strong> in one seamless environment.
+          </p>
+        </div>
+
+        <!-- THE PROBLEM -->
+        <div style="margin-bottom: 40px;">
+          <h3 class="block-heading" style="font-size: 22px; color: #FFFFFF; font-weight: 700;">The Problem</h3>
+          <ul class="goals-list" style="gap: 16px;">
+            <li style="color: #CBD5E1;">
+              <span style="color: #cde2ff; font-weight: 700; font-size: 15px; min-width: 24px;">&#10022;</span>
+              <span>Trading knowledge was scattered across YouTube, Telegram, and paid courses</span>
+            </li>
+            <li style="color: #CBD5E1;">
+              <span style="color: #cde2ff; font-weight: 700; font-size: 15px; min-width: 24px;">&#10022;</span>
+              <span>Beginners had no safe way to practice before using real money</span>
+            </li>
+            <li style="color: #CBD5E1;">
+              <span style="color: #cde2ff; font-weight: 700; font-size: 15px; min-width: 24px;">&#10022;</span>
+              <span>Most platforms offered one-way content with little expert interaction</span>
+            </li>
+            <li style="color: #CBD5E1;">
+              <span style="color: #cde2ff; font-weight: 700; font-size: 15px; min-width: 24px;">&#10022;</span>
+              <span>No structured or reliable learning path existed</span>
+            </li>
+            <li style="color: #CBD5E1;">
+              <span style="color: #cde2ff; font-weight: 700; font-size: 15px; min-width: 24px;">&#10022;</span>
+              <span>No single platform connected learning, practice, mentorship, and live trading</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- BUSINESS GOALS -->
+        <div style="margin-bottom: 40px;">
+          <h3 class="block-heading" style="font-size: 22px; color: #FFFFFF; font-weight: 700;">Business Goals</h3>
+          <ul class="goals-list" style="gap: 16px;">
+            <li style="color: #CBD5E1;">
+              <span style="color: #cde2ff; font-weight: 700; font-size: 15px; min-width: 24px;">&#10022;</span>
+              <span>Build a structured learning journey for new and intermediate traders</span>
+            </li>
+            <li style="color: #CBD5E1;">
+              <span style="color: #cde2ff; font-weight: 700; font-size: 15px; min-width: 24px;">&#10022;</span>
+              <span>Let users practice with virtual money before risking real money</span>
+            </li>
+            <li style="color: #CBD5E1;">
+              <span style="color: #cde2ff; font-weight: 700; font-size: 15px; min-width: 24px;">&#10022;</span>
+              <span>Enable 1:1 mentorship with experts</span>
+            </li>
+            <li style="color: #CBD5E1;">
+              <span style="color: #cde2ff; font-weight: 700; font-size: 15px; min-width: 24px;">&#10022;</span>
+              <span>Bring learning, practice, mentorship, and live trading into one platform</span>
+            </li>
+            <li style="color: #CBD5E1;">
+              <span style="color: #cde2ff; font-weight: 700; font-size: 15px; min-width: 24px;">&#10022;</span>
+              <span>Help traders build confidence and skills before entering the real market</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- EARNING MODEL -->
+        <div style="margin-bottom: 0;">
+          <h3 class="block-heading" style="font-size: 22px; color: #FFFFFF; font-weight: 700;">Earning Model</h3>
+          <ul class="goals-list" style="gap: 16px;">
+            <li style="color: #CBD5E1;">
+              <span style="color: #cde2ff; font-weight: 700; font-size: 15px; min-width: 24px;">&#10022;</span>
+              <span>Demo trading subscription</span>
+            </li>
+            <li style="color: #CBD5E1;">
+              <span style="color: #cde2ff; font-weight: 700; font-size: 15px; min-width: 24px;">&#10022;</span>
+              <span>Mentorship programs</span>
+            </li>
+            <li style="color: #CBD5E1;">
+              <span style="color: #cde2ff; font-weight: 700; font-size: 15px; min-width: 24px;">&#10022;</span>
+              <span>Course sales</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: MY ROLE & OWNERSHIP -->
+    <div class="overview-fullwidth">
+      <section class="designing-scope-section"
+        style="padding: 64px 0; max-width: 1000px; margin: 0 auto; text-align: left;">
+        <h4
+          style="font-family: 'Lexend', sans-serif; font-size: 13px; font-weight: 700; color: #64748B; margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 0.08em;">
+          My Role &amp; Ownership
+        </h4>
+        <h3
+          style="font-family: 'Lexend', sans-serif; font-size: 24px; font-weight: 700; color: #0F172A; margin: 0 0 20px 0; letter-spacing: -0.01em;">
+          Leading Product End-to-End
+        </h3>
+
+        <p
+          style="font-family: 'Lexend', sans-serif; font-size: 15px; line-height: 1.7; color: #475569; margin: 0 0 24px 0; max-width: 920px;">
+          As <strong>Team Lead and Senior Product Designer</strong>, I took full ownership of the product lifecycle
+          across
+          strategy, design, and engineering:
+        </p>
+
+        <ul
+          style="list-style: none; padding: 0; margin: 0 0 32px 0; max-width: 920px; display: flex; flex-direction: column; gap: 14px;">
+          <li
+            style="font-family: 'Lexend', sans-serif; font-size: 14.5px; line-height: 1.6; color: #475569; display: flex; align-items: flex-start; gap: 12px;">
+            <span style="color: #0F172A; font-weight: bold; font-size: 16px; line-height: 1;">&bull;</span>
+            <span><strong>Cross-Surface UX/UI:</strong> Led UX research, information architecture, and visual design
+              across all 3 product surfaces (Admin Panel, Website, and Mobile App).</span>
+          </li>
+          <li
+            style="font-family: 'Lexend', sans-serif; font-size: 14.5px; line-height: 1.6; color: #475569; display: flex; align-items: flex-start; gap: 12px;">
+            <span style="color: #0F172A; font-weight: bold; font-size: 16px; line-height: 1;">&bull;</span>
+            <span><strong>Full-Stack Development:</strong> Directed the frontend/backend build and personally engineered
+              core backend logic and website modules.</span>
+          </li>
+          <li
+            style="font-family: 'Lexend', sans-serif; font-size: 14.5px; line-height: 1.6; color: #475569; display: flex; align-items: flex-start; gap: 12px;">
+            <span style="color: #0F172A; font-weight: bold; font-size: 16px; line-height: 1;">&bull;</span>
+            <span><strong>AI-Assisted Velocity with Antigravity:</strong> Used <strong>Google Antigravity</strong> as an
+              agentic AI development environment to compress build cycles &mdash; taking Figma specs directly into
+              functional code while retaining 100% design fidelity.</span>
+          </li>
+          <li
+            style="font-family: 'Lexend', sans-serif; font-size: 14.5px; line-height: 1.6; color: #475569; display: flex; align-items: flex-start; gap: 12px;">
+            <span style="color: #0F172A; font-weight: bold; font-size: 16px; line-height: 1;">&bull;</span>
+            <span><strong>Zero Handoff Friction:</strong> Wearing both designer and developer hats eliminated typical
+              handoff loss and accelerated decision-making.</span>
+          </li>
+        </ul>
+
+        <div style="margin-top: 36px; border: 1px solid #E2E8F0; border-radius: 10px; overflow: hidden;">
+          <img src="img/option/hero.png" alt="Development Workflow" style="width: 100%; height: auto; display: block;">
+        </div>
+      </section>
+    </div>
+
+
+
+    <!-- SOLUTION -->
+    <div class="section-merged-group">
+      <section class="discover-banner-section" style="margin-top: 0;">
+        <div class="discover-banner-container">
+          <h2>Solution</h2>
+        </div>
+      </section>
+
+      <section style="text-align: left;">
+
+        <!-- <h3
+          style="font-family: 'Lexend', sans-serif; font-size: 28px; font-weight: 700; color: #0F172A; margin: 0 0 16px 0; letter-spacing: -0.01em;">
+          One connected trading ecosystem</h3> -->
+
+        <p
+          style="font-family: 'Lexend', sans-serif; font-size: 17px; line-height: 1.7; color: #475569; margin: 0 0 36px 0; max-width: 920px;">
+          Connected ecosystem that brings learning, course discovery, trading practice, and platform management together
+          in one place.
+        </p>
+
+        <div style="margin-bottom: 40px;">
+          <ul
+            style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; max-width: 920px;">
+            <li
+              style="font-family: 'Lexend', sans-serif; font-size: 15px; line-height: 1.6; color: #475569; display: flex; align-items: flex-start; gap: 12px;">
+              <span style="color: #0F172A; font-weight: 700; font-size: 16px;">&#10022;</span>
+              <span><strong>Course Website</strong> &mdash; Web space where users can browse courses, see what's
+                included, and purchase the ones they want.</span>
+            </li>
+            <li
+              style="font-family: 'Lexend', sans-serif; font-size: 15px; line-height: 1.6; color: #475569; display: flex; align-items: flex-start; gap: 12px;">
+              <span style="color: #0F172A; font-weight: 700; font-size: 16px;">&#10022;</span>
+              <span><strong>Student Mobile App</strong> &mdash; A learning and trading companion where students can
+                access their courses, join live classes, track progress, and practice trading with the demo
+                feature.</span>
+            </li>
+            <li
+              style="font-family: 'Lexend', sans-serif; font-size: 15px; line-height: 1.6; color: #475569; display: flex; align-items: flex-start; gap: 12px;">
+              <span style="color: #0F172A; font-weight: 700; font-size: 16px;">&#10022;</span>
+              <span><strong>Admin Backend</strong> &mdash; A central dashboard to manage courses, students, purchases,
+                live sessions, enquiries, and overall platform activity.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div style="margin-top: 36px; border: 1px solid #E2E8F0; border-radius: 10px; overflow: hidden;">
+          <img src="img/option/hero.jpg" alt="Solution Overview" style="width: 100%; height: auto; display: block;">
+        </div>
+      </section>
+    </div>
+
+
+
+    <!-- Design Process -->
+    <div class="section-merged-group">
+      <section class="discover-banner-section" style="margin-top: 0;">
+        <div class="discover-banner-container">
+          <h2>Execution Process</h2>
+        </div>
+      </section>
+
+      <section style="text-align: left;">
+
+        <!-- Intro Statement -->
+        <!-- <p
+          style="font-family: 'Lexend', sans-serif; font-size: 16px; line-height: 1.7; color: #475569; margin: 0 0 32px 0; max-width: 920px;">
+          The design process followed a structured, stakeholder-aligned flow from initial discovery through to
+          high-fidelity, development-ready screens.
+        </p> -->
+
+        <!-- 7-STEP PROCESS FLOW -->
+        <div class="process-steps">
+
+          <!-- Step 1 -->
+          <details class="process-step-card" open>
+            <summary>
+              <div class="process-step-header">
+                <span class="process-step-label">Step
+                  1</span>
+                <h4>Stakeholder &amp; PM Discussions</h4>
+              </div>
+              <span class="plus" aria-hidden="true"></span>
+            </summary>
+            <ul class="process-step-list">
+              <li class="process-step-item">
+                <span class="process-step-bullet">&bull;</span>
+                <span>Discussed the vision for the web platform and mobile app with stakeholders and PMs.</span>
+              </li>
+              <li class="process-step-item">
+                <span class="process-step-bullet">&bull;</span>
+                <span>Focused on understanding the purpose, the problem it solves, and the target users first.</span>
+              </li>
+            </ul>
+          </details>
+
+          <!-- Step 2 -->
+          <details class="process-step-card">
+            <summary>
+              <div class="process-step-header">
+                <span class="process-step-label">Step
+                  2</span>
+                <h4>Requirement Gathering</h4>
+              </div>
+              <span class="plus" aria-hidden="true"></span>
+            </summary>
+            <ul class="process-step-list">
+              <li class="process-step-item">
+                <span class="process-step-bullet">&bull;</span>
+                <span>Turned discussions into clear, documented requirements.</span>
+              </li>
+              <li class="process-step-item">
+                <span class="process-step-bullet">&bull;</span>
+                <span>Captured functional needs across all three surfaces — Admin Panel, Website, and App.</span>
+              </li>
+            </ul>
+          </details>
+
+          <!-- Step 3 -->
+          <details class="process-step-card">
+            <summary>
+              <div class="process-step-header">
+                <span class="process-step-label">Step
+                  3</span>
+                <h4>Feature &amp; Module Finalization</h4>
+              </div>
+              <span class="plus" aria-hidden="true"></span>
+            </summary>
+            <ul class="process-step-list">
+              <li class="process-step-item">
+                <span class="process-step-bullet">&bull;</span>
+                <span>Worked with stakeholders and PMs to finalize key features (course management, live classes,
+                  appointments, demo trading, etc.).</span>
+              </li>
+              <li class="process-step-item">
+                <span class="process-step-bullet">&bull;</span>
+                <span>Prioritized scope together to avoid overbuilding in v1.</span>
+              </li>
+            </ul>
+          </details>
+
+          <!-- Step 4 -->
+          <details class="process-step-card">
+            <summary>
+              <div class="process-step-header">
+                <span class="process-step-label">Step
+                  4</span>
+                <h4>Low-Fidelity Wireframes</h4>
+              </div>
+              <span class="plus" aria-hidden="true"></span>
+            </summary>
+            <ul class="process-step-list">
+              <li class="process-step-item">
+                <span class="process-step-bullet">&bull;</span>
+                <span>Sketched wireframes to map screen structure, navigation, and user flows for both Instructor and
+                  Student journeys.</span>
+              </li>
+              <li class="process-step-item">
+                <span class="process-step-bullet">&bull;</span>
+                <span>Kept it rough on purpose — focused on layout and flow, not visuals — to get quick stakeholder
+                  buy-in.</span>
+              </li>
+            </ul>
+          </details>
+
+          <!-- Step 5 -->
+          <details class="process-step-card">
+            <summary>
+              <div class="process-step-header">
+                <span class="process-step-label">Step
+                  5</span>
+                <h4>Visual Design Direction</h4>
+              </div>
+              <span class="plus" aria-hidden="true"></span>
+            </summary>
+            <ul class="process-step-list">
+              <li class="process-step-item">
+                <span class="process-step-bullet">&bull;</span>
+                <span>Finalized the visual language — colors, typography, and components — suited for a fintech/trading
+                  product, not a generic course site.</span>
+              </li>
+              <li class="process-step-item">
+                <span class="process-step-bullet">&bull;</span>
+                <span>Designed a dashboard-first interface so the demo trading experience feels like a real trading
+                  platform.</span>
+              </li>
+            </ul>
+          </details>
+
+          <!-- Step 6 -->
+          <details class="process-step-card">
+            <summary>
+              <div class="process-step-header">
+                <span class="process-step-label">Step
+                  6</span>
+                <h4>Major Screens in Figma</h4>
+              </div>
+              <span class="plus" aria-hidden="true"></span>
+            </summary>
+            <ul class="process-step-list">
+              <li class="process-step-item">
+                <span class="process-step-bullet">&bull;</span>
+                <span>Designed the key high-priority screens first — course purchase, live class access, appointment
+                  booking, and demo trading dashboard — to lock down the design system and interaction patterns.</span>
+              </li>
+            </ul>
+          </details>
+
+          <!-- Step 7 -->
+          <details class="process-step-card">
+            <summary>
+              <div class="process-step-header">
+                <span class="process-step-label">Step
+                  7</span>
+                <h4>Direct-to-Antigravity for
+                  High-Fidelity Execution</h4>
+              </div>
+              <span class="plus" aria-hidden="true"></span>
+            </summary>
+            <ul class="process-step-list">
+              <li class="process-step-item">
+                <span class="process-step-bullet">&bull;</span>
+                <span>Instead of manually building every remaining screen in Figma, we moved directly into Google
+                  Antigravity to create high-fidelity screens using the established design system as reference.</span>
+              </li>
+              <li class="process-step-item">
+                <span class="process-step-bullet">&bull;</span>
+                <span>This let design and development happen in parallel — speeding up the timeline while staying
+                  consistent with the Figma design language.</span>
+              </li>
+            </ul>
+          </details>
+
+        </div>
+
+
+
+        <!-- Process Breakdown Grid -->
+
+
+      </section>
+    </div>
+
+    <!-- SECTION 5: Deliver -->
+    <section class="backend-merged-section">
+      <section class="discover-banner-section" style="margin-top: 0;">
+        <div class="discover-banner-container">
+          <h2>Backend</h2>
+        </div>
+      </section>
+
+      <section class="pf-fullwidth-bg">
+
+
+        <!-- <div class="accordion">
+          <details>
+            <summary><span><span class="q-num">03</span><span class="q-title">Product thinking &amp; opportunity
+                  identification</span></span><span class="illo-toggle"><span class="plus"></span></span></summary>
+            <div class="panel">
+              <div class="opportunity-grid">
+                <div class="opportunity-card">
+                  <div class="opportunity-card-icon"><i class="ti ti-checkup-list"></i></div>
+                  <h4 class="opportunity-card-title">Technical Feasibility</h4>
+                  <p class="opportunity-card-desc">Collaborated with the CEO, PM, and engineering teams to evaluate
+                    the
+                    technical feasibility and impact of proposed features.</p>
+                </div>
+
+                <div class="opportunity-card">
+                  <div class="opportunity-card-icon"><i class="ti ti-link"></i></div>
+                  <h4 class="opportunity-card-title">Backend Alignment</h4>
+                  <p class="opportunity-card-desc">Aligned mobile layout blueprints with backend capabilities,
+                    ensuring
+                    API infrastructure could handle real-time sync.</p>
+                </div>
+
+                <div class="opportunity-card">
+                  <div class="opportunity-card-icon"><i class="ti ti-device-mobile"></i></div>
+                  <h4 class="opportunity-card-title">Mobile-First Strategy</h4>
+                  <p class="opportunity-card-desc">Prioritized high-frequency operations, allowing field staff to
+                    manage
+                    CRM cases on-the-go and reducing office dependencies.</p>
+                </div>
+              </div>
+            </div>
+          </details>
+        </div> -->
+
+
+
+
+
+        <!-- <h2>From discovery to design process</h2>
+        <p class="lead">Understanding the business, identifying opportunities, and designing meaningful solutions.</p> -->
+        <div class="pf-fullwidth-inner">
+
+
+
+
+
+
+
+
+
+          <!-- PRODUCTS FLOW CAROUSEL -->
+          <div class="pf-carousel-wrapper">
+            <div class="pf-carousel-track-container">
+              <div class="pf-carousel-track">
+
+                <!-- Slide 1: Dashboard -->
+                <div class="pf-slide">
+                  <div class="pf-slide-image-wrap">
+                    <img src="img/option/hero.png" alt="Admin Dashboard" class="pf-slide-img">
+                  </div>
+                  <div class="pf-slide-content">
+                    <span class="pf-slide-num">01.</span>
+                    <h4 class="pf-slide-title">Dashboard</h4>
+                    <p class="pf-slide-desc">A centralized overview providing real-time insights into learners, course
+                      sales, revenue, recent activity, and upcoming live sessions, helping admins quickly monitor
+                      platform
+                      performance and manage key activities.</p>
+                  </div>
+                </div>
+
+                <!-- Slide 2: Courses -->
+                <div class="pf-slide">
+                  <div class="pf-slide-image-wrap">
+                    <img src="img/option/hero.png" alt="Course Management" class="pf-slide-img">
+                  </div>
+                  <div class="pf-slide-content">
+                    <span class="pf-slide-num">02.</span>
+                    <h4 class="pf-slide-title">Course Management</h4>
+                    <p class="pf-slide-desc">A complete backend interface for creating, editing, and publishing courses
+                      —
+                      including module structure, video content, pricing, and enrollment controls — all managed from a
+                      single workspace.</p>
+                  </div>
+                </div>
+
+                <!-- Slide 3: Learners -->
+                <div class="pf-slide">
+                  <div class="pf-slide-image-wrap">
+                    <img src="img/option/hero.png" alt="Learner Management" class="pf-slide-img">
+                  </div>
+                  <div class="pf-slide-content">
+                    <span class="pf-slide-num">03.</span>
+                    <h4 class="pf-slide-title">Learner Management</h4>
+                    <p class="pf-slide-desc">Track enrolled students, monitor their progress across courses, view
+                      purchase
+                      history, and manage accounts — giving admins full visibility into the learner base in one place.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Slide 4: Demo Trading -->
+                <div class="pf-slide">
+                  <div class="pf-slide-image-wrap">
+                    <img src="img/option/hero.png" alt="Demo Trading Terminal" class="pf-slide-img">
+                  </div>
+                  <div class="pf-slide-content">
+                    <span class="pf-slide-num">04.</span>
+                    <h4 class="pf-slide-title">Demo Trading Terminal</h4>
+                    <p class="pf-slide-desc">A realistic trading simulator with live-style charts, order entry panels
+                      (Buy/Sell, Limit, Stop Loss), and a virtual portfolio tracker — letting students practise trading
+                      with
+                      zero financial risk before going live.</p>
+                  </div>
+                </div>
+
+                <!-- Slide 5: Live Sessions -->
+                <div class="pf-slide">
+                  <div class="pf-slide-image-wrap">
+                    <img src="img/option/hero.png" alt="Live Sessions" class="pf-slide-img">
+                  </div>
+                  <div class="pf-slide-content">
+                    <span class="pf-slide-num">05.</span>
+                    <h4 class="pf-slide-title">Live Sessions</h4>
+                    <p class="pf-slide-desc">Schedule, manage, and host live trading classes directly within the
+                      platform.
+                      Students join from the app, while admins control scheduling, notifications, and session recordings
+                      from the backend.</p>
+                  </div>
+                </div>
+
+              </div><!-- end .pf-carousel-track -->
+            </div><!-- end .pf-carousel-track-container -->
+
+            <!-- Navigation -->
+            <button class="pf-nav-float pf-nav-float-prev" aria-label="Previous slide">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+            <button class="pf-nav-float pf-nav-float-next" aria-label="Next slide">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+            <div class="pf-carousel-nav">
+              <div class="pf-dots"></div>
+            </div>
+          </div><!-- end .pf-carousel-wrapper -->
+
+
+        </div>
+
+
+
+        <!-- end .pf-fullwidth-inner -->
+      </section>
+
+      <!-- Website -->
+      <div class="section-merged-group">
+        <section class="discover-banner-section">
+          <div class="discover-banner-container">
+            <h2>Website</h2>
+          </div>
+        </section>
+
+        <section class="pf-fullwidth-bg">
+          <div class="pf-fullwidth-inner">
+
+            <!-- PRODUCTS FLOW CAROUSEL -->
+            <div class="pf-carousel-wrapper">
+              <div class="pf-carousel-track-container">
+                <div class="pf-carousel-track">
+
+                  <!-- Slide 1: Dashboard -->
+                  <div class="pf-slide">
+                    <div class="pf-slide-image-wrap">
+                      <img src="img/option/hero2.png" alt="Admin Dashboard" class="pf-slide-img">
+                    </div>
+                    <div class="pf-slide-content">
+                      <span class="pf-slide-num">01.</span>
+                      <h4 class="pf-slide-title">Dashboard</h4>
+                      <p class="pf-slide-desc">A centralized overview providing real-time insights into learners, course
+                        sales, revenue, recent activity, and upcoming live sessions, helping admins quickly monitor
+                        platform
+                        performance and manage key activities.</p>
+                    </div>
+                  </div>
+
+                  <!-- Slide 2: Courses -->
+                  <div class="pf-slide">
+                    <div class="pf-slide-image-wrap">
+                      <img src="img/option/hero2.png" alt="Course Management" class="pf-slide-img">
+                    </div>
+                    <div class="pf-slide-content">
+                      <span class="pf-slide-num">02.</span>
+                      <h4 class="pf-slide-title">Course Management</h4>
+                      <p class="pf-slide-desc">A complete backend interface for creating, editing, and publishing
+                        courses —
+                        including module structure, video content, pricing, and enrollment controls — all managed from a
+                        single workspace.</p>
+                    </div>
+                  </div>
+
+                  <!-- Slide 3: Learners -->
+                  <div class="pf-slide">
+                    <div class="pf-slide-image-wrap">
+                      <img src="img/option/hero.png" alt="Learner Management" class="pf-slide-img">
+                    </div>
+                    <div class="pf-slide-content">
+                      <span class="pf-slide-num">03.</span>
+                      <h4 class="pf-slide-title">Learner Management</h4>
+                      <p class="pf-slide-desc">Track enrolled students, monitor their progress across courses, view
+                        purchase
+                        history, and manage accounts — giving admins full visibility into the learner base in one place.
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Slide 4: Demo Trading -->
+                  <div class="pf-slide">
+                    <div class="pf-slide-image-wrap">
+                      <img src="img/option/hero.png" alt="Demo Trading Terminal" class="pf-slide-img">
+                    </div>
+                    <div class="pf-slide-content">
+                      <span class="pf-slide-num">04.</span>
+                      <h4 class="pf-slide-title">Demo Trading Terminal</h4>
+                      <p class="pf-slide-desc">A realistic trading simulator with live-style charts, order entry panels
+                        (Buy/Sell, Limit, Stop Loss), and a virtual portfolio tracker — letting students practise
+                        trading
+                        with
+                        zero financial risk before going live.</p>
+                    </div>
+                  </div>
+
+                  <!-- Slide 5: Live Sessions -->
+                  <div class="pf-slide">
+                    <div class="pf-slide-image-wrap">
+                      <img src="img/option/hero.png" alt="Live Sessions" class="pf-slide-img">
+                    </div>
+                    <div class="pf-slide-content">
+                      <span class="pf-slide-num">05.</span>
+                      <h4 class="pf-slide-title">Live Sessions</h4>
+                      <p class="pf-slide-desc">Schedule, manage, and host live trading classes directly within the
+                        platform.
+                        Students join from the app, while admins control scheduling, notifications, and session
+                        recordings
+                        from the backend.</p>
+                    </div>
+                  </div>
+
+                </div><!-- end .pf-carousel-track -->
+              </div><!-- end .pf-carousel-track-container -->
+
+              <!-- Navigation -->
+              <button class="pf-nav-float pf-nav-float-prev" aria-label="Previous slide">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
+              <button class="pf-nav-float pf-nav-float-next" aria-label="Next slide">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
+              <div class="pf-carousel-nav">
+                <div class="pf-dots"></div>
+              </div>
+            </div><!-- end .pf-carousel-wrapper -->
+
+          </div><!-- end .pf-fullwidth-inner -->
+        </section>
+      </div>
+
+      <!-- App -->
+      <div class="section-merged-group" id="app">
+        <section class="discover-banner-section">
+          <div class="discover-banner-container">
+            <h2>App</h2>
+          </div>
+        </section>
+
+        <div class="app-modules">
+          <!-- 01 ONBOARDING & AUTHENTICATION -->
+          <section class="app-module">
+            <div class="app-module-intro">
+              <div>
+                <p class="app-module-kicker">01 — Onboarding &amp; Authentication</p>
+                <h3>A simple start for every learner</h3>
+              </div>
+              <div class="app-module-story">
+                <p>The experience begins with a focused entry into The Option Trader. I kept the onboarding flow simple so a new learner can understand the product, create an account, or return to their learning journey without unnecessary steps.</p>
+                <p>The flow moves naturally from <strong>Splash → Login → Register → Forgot Password</strong>, creating a clear foundation before users enter the main product.</p>
+              </div>
+            </div>
+            <div class="app-screens app-screens-4">
+              <div class="app-screen"><div class="app-screen-content"><div class="app-screen-icon">↗</div><strong>Splash</strong><span>Image placeholder</span></div></div>
+              <div class="app-screen"><div class="app-screen-content"><div class="app-screen-icon">↪</div><strong>Login</strong><span>Image placeholder</span></div></div>
+              <div class="app-screen"><div class="app-screen-content"><div class="app-screen-icon">+</div><strong>Register</strong><span>Image placeholder</span></div></div>
+              <div class="app-screen"><div class="app-screen-content"><div class="app-screen-icon">?</div><strong>Forgot Password</strong><span>Image placeholder</span></div></div>
+            </div>
+          </section>
+
+          <!-- 02 HOME -->
+          <section class="app-module">
+            <div class="app-module-intro">
+              <div>
+                <p class="app-module-kicker">02 — Home</p>
+                <h3>Helping learners know what to do next</h3>
+              </div>
+              <div class="app-module-story">
+                <p>The home screen acts as the learner’s starting point, bringing together the things that matter most at a glance. Instead of making users search through the app, I surfaced their active courses, recommendations, upcoming live classes and popular courses directly on the home experience.</p>
+                <p>This creates a simple rhythm: <strong>continue learning, discover something useful, or join what is happening next.</strong></p>
+              </div>
+            </div>
+            <div class="app-screens app-screens-3">
+              <div class="app-screen"><div class="app-screen-content"><div class="app-screen-icon">⌂</div><strong>Home Overview</strong><span>Image placeholder</span></div></div>
+              <div class="app-screen"><div class="app-screen-content"><div class="app-screen-icon">▶</div><strong>My Courses</strong><span>Image placeholder</span></div></div>
+              <div class="app-screen"><div class="app-screen-content"><div class="app-screen-icon">◷</div><strong>Live Classes</strong><span>Image placeholder</span></div></div>
+            </div>
+          </section>
+
+          <!-- 03 COURSES -->
+          <section class="app-module">
+            <div class="app-module-intro">
+              <div>
+                <p class="app-module-kicker">03 — Courses</p>
+                <h3>Making course discovery easier</h3>
+              </div>
+              <div class="app-module-story">
+                <p>The Courses experience is where learners explore the available trading programs and decide what they want to learn next. I designed the catalogue around quick discovery, using search, categories and sorting to help users narrow down a growing set of courses.</p>
+                <p>Once a learner finds something relevant, the course detail experience gives them enough context to understand the offering and move towards purchase with confidence.</p>
+              </div>
+            </div>
+            <div class="app-screens app-screens-3">
+              <div class="app-screen"><div class="app-screen-content"><div class="app-screen-icon">⌕</div><strong>All Courses</strong><span>Image placeholder</span></div></div>
+              <div class="app-screen"><div class="app-screen-content"><div class="app-screen-icon">▤</div><strong>Course Details</strong><span>Image placeholder</span></div></div>
+              <div class="app-screen"><div class="app-screen-content"><div class="app-screen-icon">₹</div><strong>Purchase</strong><span>Image placeholder</span></div></div>
+            </div>
+          </section>
+
+          <!-- 04 TRADING -->
+          <section class="app-module">
+            <div class="app-module-intro">
+              <div>
+                <p class="app-module-kicker">04 — Trading</p>
+                <h3>Turning learning into practical experience</h3>
+              </div>
+              <div class="app-module-story">
+                <p>Trading is the most information-dense part of the product. The challenge was to present market information, expiries, strike prices, call and put values, and trading activity without making the experience feel overwhelming.</p>
+                <p>I structured the experience around the information a learner needs to understand a trade and then review its outcome through <strong>orders, positions, history and P&amp;L</strong>. This connects the learning experience with a practical demo-trading workflow.</p>
+              </div>
+            </div>
+            <div class="app-screens app-screens-3">
+              <div class="app-screen"><div class="app-screen-content"><div class="app-screen-icon">↗</div><strong>Options Chain</strong><span>Image placeholder</span></div></div>
+              <div class="app-screen"><div class="app-screen-content"><div class="app-screen-icon">▤</div><strong>Orders &amp; Positions</strong><span>Image placeholder</span></div></div>
+              <div class="app-screen"><div class="app-screen-content"><div class="app-screen-icon">₹</div><strong>History &amp; P&amp;L</strong><span>Image placeholder</span></div></div>
+            </div>
+          </section>
+
+          <!-- 05 CHAT -->
+          <section class="app-module">
+            <div class="app-module-intro">
+              <div>
+                <p class="app-module-kicker">05 — Chat</p>
+                <h3>Keeping support within the learning experience</h3>
+              </div>
+              <div class="app-module-story">
+                <p>Learning and trading can naturally create questions, so support needed to be accessible without taking users out of the app. The Chat experience provides a direct communication channel between learners and the support team.</p>
+                <p>By keeping conversations inside the same product, users can ask for help, follow responses and continue their learning journey without switching to another platform.</p>
+              </div>
+            </div>
+            <div class="app-screens app-screens-2">
+              <div class="app-screen"><div class="app-screen-content"><div class="app-screen-icon">☁</div><strong>Messages</strong><span>Image placeholder</span></div></div>
+              <div class="app-screen"><div class="app-screen-content"><div class="app-screen-icon">+</div><strong>New Chat</strong><span>Image placeholder</span></div></div>
+            </div>
+          </section>
+
+          <!-- 06 PROFILE -->
+          <section class="app-module">
+            <div class="app-module-intro">
+              <div>
+                <p class="app-module-kicker">06 — Profile</p>
+                <h3>Giving learners control beyond the course</h3>
+              </div>
+              <div class="app-module-story">
+                <p>The Profile area brings the learner’s account and learning history into one place. Rather than treating it as a basic account screen, I used it to connect the learner with the information they may return to over time.</p>
+                <p>From <strong>enrolled courses and certificates to order history, settings and support</strong>, the profile becomes a central place to manage the learner’s relationship with the platform.</p>
+              </div>
+            </div>
+            <div class="app-screens app-screens-2">
+              <div class="app-screen"><div class="app-screen-content"><div class="app-screen-icon">◉</div><strong>My Profile</strong><span>Image placeholder</span></div></div>
+              <div class="app-screen"><div class="app-screen-content"><div class="app-screen-icon">⚙</div><strong>Account &amp; Settings</strong><span>Image placeholder</span></div></div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- DELIVERABLES & PROTOTYPE BANNER SECTION -->
+      <section class="discover-banner-section">
+        <div class="discover-banner-container">
+          <h2>Deliverables &amp; Links</h2>
+        </div>
+      </section>
+
+      <!-- DELIVERABLES & PROTOTYPE CONTENT -->
+      <section class="deliverables-section"
+        style="padding: 56px 0 80px 0; max-width: 1000px; margin: 0 auto; text-align: left;">
+
+        <div style="margin-bottom: 36px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+            <span
+              style="font-family: 'Lexend', sans-serif; font-size: 15px; font-weight: 700; color: #0F172A; min-width: 260px;">Information
+              Architecture (IA)</span>
+            <span
+              style="font-family: 'Lexend', sans-serif; font-size: 11.5px; font-weight: 600; background: #F1F5F9; color: #64748B; padding: 4px 10px; border-radius: 4px; border: 1px solid #E2E8F0; display: inline-flex; align-items: center; gap: 6px;">
+              <i class="ti ti-lock" style="font-size: 12px;"></i> Confidential &bull; Access Disabled
+            </span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+            <span
+              style="font-family: 'Lexend', sans-serif; font-size: 15px; font-weight: 700; color: #0F172A; min-width: 260px;">Flow
+              Documentation &amp; Figma Specs</span>
+            <span
+              style="font-family: 'Lexend', sans-serif; font-size: 11.5px; font-weight: 600; background: #F1F5F9; color: #64748B; padding: 4px 10px; border-radius: 4px; border: 1px solid #E2E8F0; display: inline-flex; align-items: center; gap: 6px;">
+              <i class="ti ti-lock" style="font-size: 12px;"></i> Confidential &bull; Access Disabled
+            </span>
+          </div>
+        </div>
+
+        <!-- Live Prototype Link -->
+        <div
+          style="padding-top: 24px; border-top: 1px solid #E2E8F0; display: flex; flex-direction: column; gap: 18px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+            <span style="font-family: 'Lexend', sans-serif; font-size: 16px; font-weight: 700; color: #0F172A;">Main
+              website</span>
+            <a href="https://theoptiontrader.in/" target="_blank" rel="noopener noreferrer"
+              style="font-family: 'Lexend', sans-serif; font-size: 15px; font-weight: 600; color: #0F172A; text-decoration: underline; display: inline-flex; align-items: center; gap: 6px;">
+              <span>The Option Trader</span>
+              <i class="ti ti-arrow-up-right" style="font-size: 16px;"></i>
+            </a>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+            <span style="font-family: 'Lexend', sans-serif; font-size: 16px; font-weight: 700; color: #0F172A;">Download
+              APK</span>
+            <a href="https://theoptiontrader.in/app-release.apk" target="_blank" rel="noopener noreferrer"
+              style="font-family: 'Lexend', sans-serif; font-size: 15px; font-weight: 600; color: #0F172A; text-decoration: underline; display: inline-flex; align-items: center; gap: 6px;">
+              <span>Download APK</span>
+              <i class="ti ti-download" style="font-size: 16px;"></i>
+            </a>
+          </div>
+        </div>
+
+      </section>
+
+  </div>
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script>
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.5,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+  </script>
+
+  <!-- PRODUCTS FLOW CAROUSEL SCRIPT -->
+  <script>
+    function initPfCarousel(wrapper) {
+      const track = wrapper.querySelector('.pf-carousel-track');
+      const dotsContainer = wrapper.querySelector('.pf-dots');
+      const prevBtn = wrapper.querySelector('.pf-nav-float-prev');
+      const nextBtn = wrapper.querySelector('.pf-nav-float-next');
+
+      if (!track || !dotsContainer || !prevBtn || !nextBtn) return;
+
+      const slides = Array.from(track.querySelectorAll('.pf-slide'));
+      const total = slides.length;
+      const gap = 20;
+      let current = 0;
+
+      if (total === 0) return;
+
+      // Build dots
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'pf-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        dot.addEventListener('click', () => goTo(i));
+        dotsContainer.appendChild(dot);
+      });
+
+      // Distance to move per step = slide width + gap
+      function getStep() {
+        const slide = slides[0];
+        return slide.getBoundingClientRect().width + gap;
+      }
+
+      // Position the floating arrows at the vertical center of the image area
+      function positionArrows() {
+        const imgWrap = slides[0].querySelector('.pf-slide-image-wrap');
+        if (!imgWrap) return;
+        const wrapRect = wrapper.getBoundingClientRect();
+        const imgRect = imgWrap.getBoundingClientRect();
+        const center = (imgRect.top - wrapRect.top) + (imgRect.height / 2);
+        prevBtn.style.top = (center - prevBtn.offsetHeight / 2) + 'px';
+        nextBtn.style.top = (center - nextBtn.offsetHeight / 2) + 'px';
+      }
+
+      function updateState() {
+        track.style.transform = 'translateX(-' + (current * getStep()) + 'px)';
+        dotsContainer.querySelectorAll('.pf-dot').forEach((d, i) => {
+          d.classList.toggle('active', i === current);
+        });
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current === total - 1;
+      }
+
+      function goTo(idx) {
+        current = Math.max(0, Math.min(idx, total - 1));
+        updateState();
+      }
+
+      prevBtn.addEventListener('click', () => goTo(current - 1));
+      nextBtn.addEventListener('click', () => goTo(current + 1));
+
+      // Touch / swipe support
+      let startX = 0;
+      let isDragging = false;
+      track.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+      }, { passive: true });
+      track.addEventListener('touchend', e => {
+        if (!isDragging) return;
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) goTo(current + (diff > 0 ? 1 : -1));
+        isDragging = false;
+      }, { passive: true });
+
+      // Keyboard support
+      document.addEventListener('keydown', e => {
+        if (e.target.closest && e.target.closest('.pf-carousel-wrapper')) {
+          if (e.key === 'ArrowRight') goTo(current + 1);
+          if (e.key === 'ArrowLeft') goTo(current - 1);
+        }
+      });
+
+      // Re-position + re-calc on resize / after images load
+      const refresh = () => {
+        positionArrows();
+        updateState();
+      };
+      window.addEventListener('resize', refresh);
+      window.addEventListener('load', refresh);
+
+      // Init
+      refresh();
+    }
+
+    document.querySelectorAll('.pf-carousel-wrapper').forEach(initPfCarousel);
+  </script>
+
+</body>
+
+</html>

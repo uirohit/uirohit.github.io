@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/port/fav.png">
+    <title>Case Study: Fixing Zupee Ludo | Rohit Singh - UI/UX Designer</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Custom Style Sheets -->
+    <link rel="stylesheet" href="assets/css/style2.css">
+    <link rel="stylesheet" href="assets/css/zupee-case-study.css">
+    
+    <style>
+        :root {
+            --primary-color: #0052FF;
+            --primary-dark: #F8FAFC;
+            --accent-color: #00D4FF;
+            --bg-light: #0B0F19;
+            --text-dark: #E2E8F0;
+            --text-muted: #94A3B8;
+            --card-bg: #111827;
+            --card-hover-bg: #1E293B;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: #0B0F19;
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Header Area */
+        .rts-header {
+            background-color: rgba(11, 15, 25, 0.9) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .FDC-dropdown-main-element {
+            color: #FFFFFF !important;
+            font-weight: 500;
+            transition: opacity 0.2s ease;
+        }
+
+        .FDC-dropdown-main-element:hover {
+            opacity: 0.8;
+        }
+
+        /* Case Study Top Section */
+        .cs-top-meta {
+            padding: 50px 0 30px;
+        }
+
+        .cs-badge {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #94A3B8;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .cs-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #FFFFFF;
+            line-height: 1.2;
+            margin-bottom: 25px;
+        }
+
+        /* Cream Banner Placeholder */
+        .cream-banner-placeholder {
+            background: #FFEED9;
+            border-radius: 16px;
+            padding: 60px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin-bottom: 60px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .cream-banner-content {
+            text-align: center;
+            color: #5C3D2E;
+        }
+
+        .cream-banner-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            animation: bounce 3s infinite;
+        }
+
+        /* Metadata Block */
+        .meta-details-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 30px 0;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .meta-detail-col {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .meta-detail-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #64748B;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .meta-detail-val {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #F8FAFC;
+        }
+
+        /* Grid layouts */
+        .section-block {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 50px;
+            margin-bottom: 80px;
+        }
+
+        .section-sidebar-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            line-height: 1.3;
+        }
+
+        .section-content {
+            font-size: 1rem;
+            color: #94A3B8;
+        }
+
+        .section-content strong {
+            color: #FFFFFF;
+        }
+
+        .highlight-quote {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin: 25px 0;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 20px;
+        }
+
+        /* Who We Spoke To */
+        .spoke-to-card {
+            background: #111827;
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .spoke-to-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 25px;
+        }
+
+        .spoke-to-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .person-tag {
+            background: #1E293B;
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .person-tag:hover {
+            transform: translateY(-4px);
+            border-color: #3b82f6;
+        }
+
+        .person-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .person-label {
+            font-weight: 600;
+            color: #F1F5F9;
+            font-size: 0.875rem;
+        }
+
+        /* Mockup Grid 3 items */
+        .mockups-row-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .mockup-item-container {
+            background: rgba(30, 41, 59, 0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Styled Phone Placeholder */
+        .phone-placeholder {
+            width: 170px;
+            height: 350px;
+            background: #1E293B;
+            border: 6px solid #334155;
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 12px;
+        }
+
+        .phone-placeholder-notch {
+            width: 70px;
+            height: 10px;
+            background: #334155;
+            border-radius: 0 0 8px 8px;
+            margin: 0 auto;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .phone-placeholder-screen {
+            flex-grow: 1;
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            justify-content: center;
+            align-items: center;
+            background: #0B0F19;
+            border-radius: 12px;
+            padding: 10px;
+        }
+
+        .screen-block-mock {
+            width: 100%;
+            height: 25px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Step by Step Onboarding (5 items) */
+        .mockups-row-5 {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin: 60px 0;
+        }
+
+        .step-label {
+            font-size: 0.75rem;
+            color: #3b82f6;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .step-title {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 4px;
+        }
+
+        .step-desc {
+            font-size: 0.75rem;
+            color: #64748B;
+        }
+
+        /* 4 Layout Cards Grid */
+        .layout-grid-4 {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 25px;
+            margin: 60px 0;
+        }
+
+        .layout-grid-card {
+            background: rgba(30, 41, 59, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .wallet-card-mock {
+            background: #1E293B;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 20px;
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .wallet-card-header {
+            font-size: 0.75rem;
+            color: #94A3B8;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .wallet-card-balance {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #10B981;
+            margin-bottom: 15px;
+        }
+
+        .wallet-card-btn {
+            background: #10B981;
+            color: white;
+            padding: 8px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        /* Dark Spreadsheet Section */
+        .dark-data-section {
+            background: #060911;
+            border-radius: 20px;
+            padding: 50px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            margin: 60px 0;
+        }
+
+        .dark-section-title {
+            font-size: 1.5rem;
+            color: #FFFFFF;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .dark-section-desc {
+            font-size: 0.875rem;
+            color: #64748B;
+            margin-bottom: 30px;
+        }
+
+        .data-table-wrapper {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .dark-data-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.875rem;
+        }
+
+        .dark-data-table th {
+            background: #111827;
+            color: #94A3B8;
+            padding: 15px;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .dark-data-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #E2E8F0;
+        }
+
+        .dark-data-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-badge.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10B981;
+        }
+
+        .status-badge.fail {
+            background: rgba(239, 68, 68, 0.1);
+            color: #EF4444;
+        }
+
+        /* Animations */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 991px) {
+            .section-block {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .mockups-row-3 {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .mockups-row-5 {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            .layout-grid-4 {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER AREA -->
+    <header class="rts-header style-six header__default">
+        <div class="container">
+            <div class="row">
+                <div class="d-flex justify-content-between align-items-center py-4">
+                    <div class="rts-header__logo">
+                        <a href="index.html" class="site-logo">
+                            <img src="assets/images/r-logo.svg" alt="R" width="20">
+                        </a>
+                    </div>
+                    <div class="rts-header__right">
+                        <nav class="rts-header__menu" id="mobile-menu">
+                            <div class="FDC-menu">
+                                <ul class="list-unstyled d-flex align-items-center gap-4 m-0">
+                                    <li><a href="index.html" class="FDC-dropdown-main-element text-decoration-none"><i class="fa-solid fa-arrow-left me-2"></i>Back to Work</a></li>
+                                    <li><a href="https://www.linkedin.com/in/rohitsinghuiux/" target="_blank" class="FDC-dropdown-main-element text-decoration-none">LinkedIn</a></li>
+                                    <li><a href="https://www.youtube.com/@RohitUXD/" target="_blank" class="FDC-dropdown-main-element text-decoration-none">YouTube</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENT WRAPPER -->
+    <div class="container py-5">
+        
+        <!-- Badge & Title -->
+        <div class="cs-top-meta">
+            <span class="cs-badge">Case Study</span>
+            <h1 class="cs-title">Fixing Zupee Ludo</h1>
+            <p style="color: #94A3B8; font-size: 1.25rem; margin-top: -15px;">Designing for the User Nobody Designed For</p>
+        </div>
+
+        <!-- Cream Banner Placeholder -->
+        <div class="cream-banner-placeholder">
+            <div class="cream-banner-content">
+                <div class="cream-banner-icon">🎮</div>
+                <h4 style="font-weight: 800; font-size: 1.5rem; margin-bottom: 5px;">Zupee Ludo Supreme Case Study Banner</h4>
+                <p style="font-size: 0.875rem; opacity: 0.8; max-width: 500px; margin: 0 auto;">Illustration Placeholder: Tier-2 and Tier-3 casual gaming user demographics playing real-money skill games.</p>
+            </div>
+        </div>
+
+        <!-- Metadata Row -->
+        <div class="meta-details-row">
+            <div class="meta-detail-col">
+                <div class="meta-detail-label">Role</div>
+                <div class="meta-detail-val">Design & Research</div>
+            </div>
+            <div class="meta-detail-col">
+                <div class="meta-detail-label">Platform</div>
+                <div class="meta-detail-val">Android & iOS</div>
+            </div>
+            <div class="meta-detail-col">
+                <div class="meta-detail-label">Timeline</div>
+                <div class="meta-detail-val">5-6 months</div>
+            </div>
+            <div class="meta-detail-col">
+                <div class="meta-detail-label">Tools</div>
+                <div class="meta-detail-val">Figma, A/B Testing</div>
+            </div>
+            <div class="meta-detail-col">
+                <div class="meta-detail-label">Industry</div>
+                <div class="meta-detail-val">Real Money Gaming</div>
+            </div>
+        </div>
+
+        <!-- Narrative Section: Context -->
+        <div class="section-block">
+            <div class="section-sidebar-title">A Little Context First</div>
+            <div class="section-content">
+                <p>Zupee's hero product, Ludo Supreme, is India's most played real-money skill game with 100M+ users, prime-time TV ads, and Kapil Sharma and Salman Khan as the face of the brand but beneath that scale was a quiet problem. New users from Tier 2 and Tier 3 India were not making it through their first game.</p>
+                <div class="highlight-quote">
+                    So how might we fix something that nobody could even see was broken?
+                </div>
+            </div>
+        </div>
+
+        <hr style="border-top: 1px solid rgba(255, 255, 255, 0.08); margin: 40px 0;">
+
+        <!-- Narrative Section: The Invisible Problem -->
+        <div class="section-block">
+            <div class="section-sidebar-title">The Invisible Problem</div>
+            <div class="section-content">
+                <p>Approximately 30% of new users were dropping off within their first gameplay session. They did not know what to tap, when to act, or that missing three turns would get them kicked out of a game they just paid to join. No crashes. No errors. Just confusion that quietly pushed users away and never brought them back.</p>
+            </div>
+        </div>
+
+        <!-- 3 Mockup Screens block -->
+        <div class="mockups-row-3">
+            <!-- Screen 1 -->
+            <div class="mockup-item-container">
+                <div class="phone-placeholder">
+                    <div class="phone-placeholder-notch"></div>
+                    <div class="phone-placeholder-screen">
+                        <div class="screen-block-mock" style="background: rgba(0, 82, 255, 0.3);"></div>
+                        <div class="screen-block-mock" style="background: rgba(16, 185, 129, 0.3);"></div>
+                        <div class="screen-block-mock" style="background: rgba(245, 158, 11, 0.3);"></div>
+                        <div class="screen-block-mock" style="height: 120px;"></div>
+                    </div>
+                </div>
+                <div class="step-title">Verify & Pay Options</div>
+                <div class="step-desc">Interactive payment option lists and balances</div>
+            </div>
+            <!-- Screen 2 -->
+            <div class="mockup-item-container">
+                <div class="phone-placeholder">
+                    <div class="phone-placeholder-notch"></div>
+                    <div class="phone-placeholder-screen">
+                        <div class="screen-block-mock"></div>
+                        <div class="screen-block-mock" style="height: 180px;"></div>
+                        <div class="screen-block-mock"></div>
+                    </div>
+                </div>
+                <div class="step-title">Details View</div>
+                <div class="step-desc">Verification parameters checklist</div>
+            </div>
+            <!-- Screen 3 -->
+            <div class="mockup-item-container">
+                <div class="phone-placeholder">
+                    <div class="phone-placeholder-notch"></div>
+                    <div class="phone-placeholder-screen">
+                        <div class="screen-block-mock" style="background: rgba(16, 185, 129, 0.2);"></div>
+                        <div class="screen-block-mock" style="height: 100px;"></div>
+                        <div class="screen-block-mock"></div>
+                        <div class="screen-block-mock"></div>
+                    </div>
+                </div>
+                <div class="step-title">Payout Setup</div>
+                <div class="step-desc">Validation and withdraw choices panel</div>
+            </div>
+        </div>
+
+        <hr style="border-top: 1px solid rgba(255, 255, 255, 0.08); margin: 40px 0;">
+
+        <!-- Narrative Section: How We Found the Truth -->
+        <div class="section-block">
+            <div class="section-sidebar-title">How We Found the Truth</div>
+            <div class="section-content">
+                <p>No labs. No forms. No formal setups.</p>
+                <p><strong>We took the research to the streets. 10 teams, 43 first time users, across Delhi NCR.</strong></p>
+                <p>One rule was non negotiable. Nobody who had used Zupee before. We needed completely fresh eyes.</p>
+                <p>Each session followed a structured discussion guide. Users were asked to download the app, sign up, and play their first game while we observed without interfering.</p>
+
+                <!-- Who we spoke to Container -->
+                <div class="spoke-to-card">
+                    <div class="spoke-to-title">Who we spoke to</div>
+                    <div class="spoke-to-grid">
+                        <div class="person-tag">
+                            <span class="person-icon">🚕</span>
+                            <span class="person-label">Cab and auto drivers</span>
+                        </div>
+                        <div class="person-tag">
+                            <span class="person-icon">📦</span>
+                            <span class="person-label">Delivery partners</span>
+                        </div>
+                        <div class="person-tag">
+                            <span class="person-icon">👮‍♂️</span>
+                            <span class="person-label">Security guards</span>
+                        </div>
+                        <div class="person-tag">
+                            <span class="person-icon">🧹</span>
+                            <span class="person-label">House help</span>
+                        </div>
+                        <div class="person-tag">
+                            <span class="person-icon">👦</span>
+                            <span class="person-label">Shop helpers</span>
+                        </div>
+                        <div class="person-tag">
+                            <span class="person-icon">🧑‍🔧</span>
+                            <span class="person-label">Mechanics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr style="border-top: 1px solid rgba(255, 255, 255, 0.08); margin: 40px 0;">
+
+        <!-- Step by Step Flow Row of 5 -->
+        <h3 style="font-weight: 800; font-size: 1.5rem; color: #FFFFFF; margin-bottom: 10px;">Onboarding & Validation Steps</h3>
+        <p style="color: #64748B; margin-bottom: 30px;">Revised onboarding flows to reduce Drop-off rates.</p>
+
+        <div class="mockups-row-5">
+            <!-- Step 1 -->
+            <div class="text-center">
+                <div class="phone-placeholder" style="width: 100%; height: 300px; margin-bottom: 10px;">
+                    <div class="phone-placeholder-screen" style="padding: 5px;">
+                        <div class="screen-block-mock" style="height: 100px; background: rgba(59, 130, 246, 0.2);"></div>
+                        <span style="font-size: 0.75rem; color: white;">PAN / Bank Docs</span>
+                    </div>
+                </div>
+                <div class="step-label">Step 1</div>
+                <div class="step-title">Doc Upload</div>
+                <div class="step-desc">Aadhar / PAN Verification screen</div>
+            </div>
+            <!-- Step 2 -->
+            <div class="text-center">
+                <div class="phone-placeholder" style="width: 100%; height: 300px; margin-bottom: 10px;">
+                    <div class="phone-placeholder-screen" style="padding: 5px;">
+                        <div class="screen-block-mock" style="height: 100px; background: rgba(245, 158, 11, 0.2);"></div>
+                        <span style="font-size: 0.75rem; color: white;">Pending Status</span>
+                    </div>
+                </div>
+                <div class="step-label">Step 2</div>
+                <div class="step-title">In-Review</div>
+                <div class="step-desc">Pending status state screen</div>
+            </div>
+            <!-- Step 3 -->
+            <div class="text-center">
+                <div class="phone-placeholder" style="width: 100%; height: 300px; margin-bottom: 10px;">
+                    <div class="phone-placeholder-screen" style="padding: 5px;">
+                        <div class="screen-block-mock" style="height: 100px; background: rgba(16, 185, 129, 0.2);"></div>
+                        <span style="font-size: 0.75rem; color: white;">Success Alert</span>
+                    </div>
+                </div>
+                <div class="step-label">Step 3</div>
+                <div class="step-title">Approved</div>
+                <div class="step-desc">Verification complete checkmark alert</div>
+            </div>
+            <!-- Step 4 -->
+            <div class="text-center">
+                <div class="phone-placeholder" style="width: 100%; height: 300px; margin-bottom: 10px;">
+                    <div class="phone-placeholder-screen" style="padding: 5px;">
+                        <div class="screen-block-mock" style="height: 100px;"></div>
+                        <span style="font-size: 0.75rem; color: white;">Add Money</span>
+                    </div>
+                </div>
+                <div class="step-label">Step 4</div>
+                <div class="step-title">Wallet Balance</div>
+                <div class="step-desc">Balance setup messaging layout</div>
+            </div>
+            <!-- Step 5 -->
+            <div class="text-center">
+                <div class="phone-placeholder" style="width: 100%; height: 300px; margin-bottom: 10px;">
+                    <div class="phone-placeholder-screen" style="padding: 5px;">
+                        <div class="screen-block-mock" style="height: 100px; background: rgba(167, 139, 250, 0.2);"></div>
+                        <span style="font-size: 0.75rem; color: white;">Chat Support</span>
+                    </div>
+                </div>
+                <div class="step-label">Step 5</div>
+                <div class="step-title">Support</div>
+                <div class="step-desc">Interactive chat options menu</div>
+            </div>
+        </div>
+
+        <hr style="border-top: 1px solid rgba(255, 255, 255, 0.08); margin: 40px 0;">
+
+        <!-- 4 Layout Card Grid -->
+        <h3 style="font-weight: 800; font-size: 1.5rem; color: #FFFFFF; margin-bottom: 10px;">Interface Components & Mockups</h3>
+        <p style="color: #64748B; margin-bottom: 30px;">Breakdown of customized wallet interfaces, transaction grids, and banners designed for low-friction cashouts.</p>
+
+        <div class="layout-grid-4">
+            <!-- Left Large Card: Phone with dashboard menu -->
+            <div class="layout-grid-card">
+                <div class="phone-placeholder" style="width: 200px; height: 380px; margin: 0;">
+                    <div class="phone-placeholder-screen">
+                        <div class="screen-block-mock" style="height: 50px; background: rgba(59, 130, 246, 0.25);"></div>
+                        <div class="screen-block-mock"></div>
+                        <div class="screen-block-mock" style="height: 120px;"></div>
+                        <div class="screen-block-mock" style="background: rgba(16, 185, 129, 0.25);"></div>
+                    </div>
+                </div>
+                <div style="font-size: 0.875rem; color: #94A3B8; margin-top: 15px; font-weight: 600;">Main Lobby Dashboard UI</div>
+            </div>
+            
+            <!-- Right top Card: Wallet setup -->
+            <div class="layout-grid-card">
+                <div class="wallet-card-mock">
+                    <div class="wallet-card-header">TOTAL WINNINGS</div>
+                    <div class="wallet-card-balance">₹245.50</div>
+                    <div class="wallet-card-btn">Withdraw Funds</div>
+                </div>
+                <div style="font-size: 0.875rem; color: #94A3B8; margin-top: 15px;">Cashout validation widget</div>
+            </div>
+
+            <!-- Left bottom Card: Bank details validation -->
+            <div class="layout-grid-card">
+                <div class="wallet-card-mock" style="background: #111827;">
+                    <div style="font-size: 0.875rem; font-weight: 700; color: white; margin-bottom: 10px;">Bank Account details</div>
+                    <div class="screen-block-mock" style="margin-bottom: 8px;"></div>
+                    <div class="screen-block-mock" style="width: 60%;"></div>
+                </div>
+                <div style="font-size: 0.875rem; color: #94A3B8; margin-top: 15px;">Verification form UI</div>
+            </div>
+
+            <!-- Right bottom Card: Congratulations Banner -->
+            <div class="layout-grid-card" style="background: linear-gradient(135deg, #10B981 0%, #065F46 100%);">
+                <div style="font-size: 1.5rem; margin-bottom: 8px;">🎉</div>
+                <h4 style="color: white; font-weight: 800; font-size: 1.25rem; margin-bottom: 4px;">Congratulations!</h4>
+                <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.875rem; text-align: center; margin: 0;">You won ₹10,00,000</p>
+                <div style="font-size: 0.875rem; color: rgba(255,255,255,0.6); margin-top: 15px;">Winner Pop-up Alert Banner</div>
+            </div>
+        </div>
+
+        <hr style="border-top: 1px solid rgba(255, 255, 255, 0.08); margin: 40px 0;">
+
+        <!-- Dark Spreadsheet Section -->
+        <div class="dark-data-section">
+            <div class="dark-section-title">Usability Testing & Metric Grid</div>
+            <p class="dark-section-desc">Extracted testing spreadsheets documenting user failure points during checkout trials across cab stations, markets, and shops.</p>
+            
+            <div class="data-table-wrapper">
+                <table class="dark-data-table">
+                    <thead>
+                        <tr>
+                            <th>User Persona</th>
+                            <th>Friction Point Checked</th>
+                            <th>Action Taken</th>
+                            <th>Session Result</th>
+                            <th>A/B Test Metric</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>🚕 Cab Driver (Age 34)</td>
+                            <td>KYC document upload guidelines clarity</td>
+                            <td>Used camera photo upload option</td>
+                            <td><span class="status-badge success">Success</span></td>
+                            <td>+14% retention</td>
+                        </tr>
+                        <tr>
+                            <td>👮‍♂️ Security Guard (Age 41)</td>
+                            <td>Adding cash payment flow selection</td>
+                            <td>Missed UPI option click trigger</td>
+                            <td><span class="status-badge fail">Failure</span></td>
+                            <td>Revised CTA trigger size</td>
+                        </tr>
+                        <tr>
+                            <td>📦 Delivery Partner (Age 23)</td>
+                            <td>Withdrawal transfer response time info</td>
+                            <td>Completed UPI payout confirmation</td>
+                            <td><span class="status-badge success">Success</span></td>
+                            <td>+22% withdrawal completions</td>
+                        </tr>
+                        <tr>
+                            <td>🧹 House Help (Age 29)</td>
+                            <td>Gameplay missed turn kick-out warnings</td>
+                            <td>Ignored turn countdown timer</td>
+                            <td><span class="status-badge fail">Failure</span></td>
+                            <td>Added audio buzz warning alert</td>
+                        </tr>
+                        <tr>
+                            <td>🧑‍🔧 Mechanic (Age 30)</td>
+                            <td>Wallet dashboard navigation visibility</td>
+                            <td>Found wallet button in main menu</td>
+                            <td><span class="status-badge success">Success</span></td>
+                            <td>+18% cash balances checks</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ================================================ -->
+        <!-- FLOWS SECTION (Bonus Interactive Simulator) -->
+        <!-- ================================================ -->
+        <div class="flows-section-wrapper py-4">
+            <div class="flows-section-heading mb-4">
+                <h3 style="font-weight: 800; font-size: 1.5rem; color: #FFFFFF;">Interactive Flows Simulator</h3>
+                <p style="color: #64748B;">Use the dashboard controls to preview live screen steps and transitions designed for Zupee Ludo UX.</p>
+            </div>
+
+            <!-- Flows Dashboard Container -->
+            <div class="flows-dashboard-container">
+                <div class="flows-dashboard-header">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="dropdown">
+                            <button class="btn btn-dark dropdown-toggle flows-dropdown-btn" type="button" id="flowsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                Latest
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="flowsDropdown">
+                                <li><a class="dropdown-item active" href="#">Latest</a></li>
+                                <li><a class="dropdown-item" href="#">Screens</a></li>
+                                <li><a class="dropdown-item" href="#">UI Elements</a></li>
+                            </ul>
+                        </div>
+                        <div class="flows-tabs-container d-none d-md-flex align-items-center gap-3">
+                            <span class="flows-tab-item">Screens</span>
+                            <span class="flows-tab-item">UI Elements</span>
+                            <span class="flows-tab-item active">Flows</span>
+                        </div>
+                    </div>
+                    <div class="flows-count text-muted" id="flowsCountText">
+                        Showing 6 screens
+                    </div>
+                </div>
+
+                <div class="flows-workspace">
+                    <!-- Sidebar -->
+                    <div class="flows-sidebar">
+                        <div class="flows-search-box mb-4">
+                            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                            <input type="text" class="form-control search-input" placeholder="Search..." id="flowsSearchInput">
+                        </div>
+                        <ul class="flows-menu-list" id="flowsMenuList">
+                            <li class="flows-menu-item active" data-flow="onboarding">
+                                <span>Onboarding</span>
+                                <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                            </li>
+                            <li class="flows-menu-item" data-flow="gameplay">
+                                <span>Gameplay Flow</span>
+                                <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                            </li>
+                            <li class="flows-menu-item" data-flow="withdrawal">
+                                <span>Your Rides / Cashout</span>
+                                <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                            </li>
+                            <li class="flows-menu-item" data-flow="inbox">
+                                <span>Inbox &amp; Chat</span>
+                                <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                            </li>
+                            <li class="flows-menu-item" data-flow="profile">
+                                <span>Profile Settings</span>
+                                <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                            </li>
+                            <li class="flows-menu-item" data-flow="logging">
+                                <span>Logging in</span>
+                                <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Screen Gallery Area -->
+                    <div class="flows-gallery-wrapper">
+                        <div class="flows-gallery" id="flowsGallery">
+                            <!-- Screens loaded dynamically -->
+                        </div>
+                        <button class="flows-scroll-btn scroll-right" id="scrollRightBtn">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                        <button class="flows-scroll-btn scroll-left d-none" id="scrollLeftBtn">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Back Navigation -->
+        <div class="back-btn-container text-center text-lg-start my-5">
+            <a href="index.html" class="back-home-btn">
+                <i class="fa-solid fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="py-4 text-center" style="background: #080B11; color: #718096; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05);">
+        <div class="container">
+            <p class="m-0">© ROHIT SINGH - Case Study Detail</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Simulator Scripts -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const flowsData = {
+                onboarding: [
+                    { title: "1. Splash Screen", desc: "Zupee Blue branding", html: `<div class="screen-body screen-splash"><div class="screen-logo-mock">Z</div><div class="screen-title-mock">Zupee Ludo</div><div class="screen-sub-mock">Supreme Ludo Game</div><div class="screen-btn-mock">Start Game</div></div>` },
+                    { title: "2. Language Choose", desc: "Locale selections", html: `<div class="screen-body"><div class="screen-title-mock">Select Language</div><div class="screen-sub-mock">Choose preferred language</div><div class="screen-option-list"><div class="screen-option-item"><div class="screen-option-circle active"></div><div class="screen-option-bar"></div></div><div class="screen-option-item"><div class="screen-option-circle"></div><div class="screen-option-bar"></div></div><div class="screen-option-item"><div class="screen-option-circle"></div><div class="screen-option-bar"></div></div></div><div class="screen-btn-mock">Continue</div></div>` },
+                    { title: "3. Mobile Login", desc: "Enter 10-digit phone", html: `<div class="screen-body"><div class="screen-title-mock">Login / Sign Up</div><div class="screen-sub-mock">Enter mobile number</div><div class="screen-option-item" style="margin-top: 15px;"><i class="fa-solid fa-phone" style="color: #64748B; font-size: 0.8rem; margin-right: 8px;"></i><div class="screen-option-bar" style="width: 50%;"></div></div><div class="screen-btn-mock" style="background:#475569;">Send OTP</div></div>` },
+                    { title: "4. OTP Verify", desc: "6-digit OTP code", html: `<div class="screen-body"><div class="screen-title-mock">Verify OTP</div><div class="screen-sub-mock">Enter 6-digit code sent</div><div class="otp-boxes"><div class="otp-input-mock">4</div><div class="otp-input-mock">8</div><div class="otp-input-mock">2</div><div class="otp-input-mock">9</div><div class="otp-input-mock"></div><div class="otp-input-mock"></div></div><div class="screen-btn-mock">Verify</div></div>` },
+                    { title: "5. Claim Reward", desc: "Welcome bonus ₹10", html: `<div class="screen-body screen-splash"><div class="screen-logo-mock" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);">₹</div><div class="screen-title-mock">Claim Welcome Bonus</div><div class="screen-sub-mock">Free ₹10 credited to wallet</div><div class="screen-btn-mock">Claim Now</div></div>` },
+                    { title: "6. App Dashboard", desc: "Game lobby selections", html: `<div class="screen-body"><div class="d-flex justify-content-between align-items-center mb-3"><div class="screen-option-circle active"></div><div style="width: 50px; height: 10px; background: rgba(255,255,255,0.2); border-radius: 5px;"></div></div><div class="screen-option-item" style="height: 60px; justify-content: center; flex-direction: column;"><div class="screen-option-bar" style="width: 40%; margin-bottom: 5px;"></div><div class="screen-option-bar" style="width: 80%;"></div></div><div class="screen-btn-mock">Play Ludo Supreme</div></div>` }
+                ],
+                gameplay: [
+                    { title: "1. Select Battle", desc: "Choose entrance fee", html: `<div class="screen-body"><div class="screen-title-mock">Ludo Lobbies</div><div class="screen-sub-mock">Choose your table entry</div><div class="screen-option-list"><div class="screen-option-item" style="justify-content: space-between;"><span>₹10 Entry</span><span style="color:var(--accent-color);">Win ₹34</span></div><div class="screen-option-item" style="justify-content: space-between;"><span>₹25 Entry</span><span style="color:var(--accent-color);">Win ₹85</span></div><div class="screen-option-item" style="justify-content: space-between;"><span>₹100 Entry</span><span style="color:var(--accent-color);">Win ₹340</span></div></div></div>` },
+                    { title: "2. Matchmaking", desc: "Finding other players", html: `<div class="screen-body screen-splash"><div class="spinner-border text-info mb-3" role="status" style="width: 3.5rem; height: 3.5rem; border-width: 0.25em;"><span class="visually-hidden">Loading...</span></div><div class="screen-title-mock">Finding Players...</div><div class="screen-sub-mock">Matching you with active players</div></div>` },
+                    { title: "3. Active Board", desc: "Playing the match", html: `<div class="screen-body"><div class="d-flex justify-content-between mb-2"><div style="font-size:0.65rem;">Player 1 (You)</div><div style="font-size:0.65rem; color:#64748B;">Player 2</div></div><div class="ludo-grid-mock"><div class="ludo-quadrant red"></div><div class="ludo-quadrant white"></div><div class="ludo-quadrant green"></div><div class="ludo-quadrant white"></div><div class="ludo-quadrant white"></div><div class="ludo-quadrant white"></div><div class="ludo-quadrant blue"></div><div class="ludo-quadrant white"></div><div class="ludo-quadrant yellow"></div></div><div class="screen-btn-mock" style="background:#10B981;">Roll Dice ⚄</div></div>` },
+                    { title: "4. Turn Alert Warning", desc: "Missed turn notification", html: `<div class="screen-body"><div class="d-flex justify-content-between mb-2"><div style="font-size:0.65rem;">Player 1</div><div style="font-size:0.65rem;">Player 2</div></div><div class="ludo-grid-mock" style="opacity: 0.3;"><div class="ludo-quadrant red"></div><div class="ludo-quadrant white"></div><div class="ludo-quadrant green"></div><div class="ludo-quadrant white"></div><div class="ludo-quadrant white"></div><div class="ludo-quadrant white"></div><div class="ludo-quadrant blue"></div><div class="ludo-quadrant white"></div><div class="ludo-quadrant yellow"></div></div><div style="position: absolute; top: 30%; left: 10px; right: 10px; background: #EF4444; padding: 15px; border-radius: 12px; text-align: center; box-shadow: 0 10px 20px rgba(239, 68, 68, 0.4);"><div class="screen-title-mock" style="font-size:0.8rem; color: white;">Missed 1/3 turns!</div><p style="font-size:0.65rem; color: white; margin: 5px 0 0; line-height: 1.3;">If you miss 3 turns you will be disqualified.</p></div></div>` }
+                ],
+                withdrawal: [
+                    { title: "1. Wallet Balance", desc: "Deposit and winnings", html: `<div class="screen-body"><div class="screen-title-mock">My Wallet</div><div class="screen-sub-mock">Total balance details</div><div class="screen-option-item" style="flex-direction: column; align-items: flex-start; height: 70px; justify-content: center;"><span style="font-size: 0.6rem; color: #64748B;">WINNINGS</span><span style="font-size: 1.4rem; font-weight: 800; color: #10B981; margin-top: 3px;">₹245.50</span></div><div class="screen-btn-mock" style="background:#10B981;">Withdraw Cash</div></div>` },
+                    { title: "2. Payout Choice", desc: "Withdraw to UPI/Bank", html: `<div class="screen-body"><div class="screen-title-mock">Withdraw Funds</div><div class="screen-sub-mock">Select payout method</div><div class="screen-option-list"><div class="screen-option-item"><div class="screen-option-circle active"></div><span>UPI Transfer</span></div><div class="screen-option-item"><div class="screen-option-circle"></div><span>Bank Account</span></div></div><div class="screen-btn-mock">Confirm Withdrawal</div></div>` },
+                    { title: "3. Request Sent", desc: "Cashout request complete", html: `<div class="screen-body screen-splash"><div class="screen-logo-mock" style="background: linear-gradient(135deg, #10B981 0%, #059669 100%);"><i class="fa-solid fa-check"></i></div><div class="screen-title-mock">Payout Success!</div><div class="screen-sub-mock">Funds will be credited shortly</div><div class="screen-btn-mock" style="background:#10B981;">Back to Wallet</div></div>` }
+                ],
+                inbox: [
+                    { title: "1. Message List", desc: "Chats & Notifications", html: `<div class="screen-body" style="align-items:center; justify-content:center;"><i class="fa-regular fa-envelope" style="font-size: 2.5rem; color:#475569; margin-bottom:15px;"></i><div class="screen-title-mock">Inbox is empty</div><div class="screen-sub-mock">All your communications appear here</div></div>` }
+                ],
+                profile: [
+                    { title: "1. Profile Overview", desc: "Manage username & wallet", html: `<div class="screen-body"><div style="width:50px; height:50px; background:#475569; border-radius:50%; margin: 0 auto 10px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; font-weight:700;">R</div><div class="screen-option-list"><div class="screen-option-item" style="justify-content:space-between;"><span style="font-size:0.75rem;">Name</span><span style="font-size:0.75rem; color:#64748B;">Rohit Singh</span></div><div class="screen-option-item" style="justify-content:space-between;"><span style="font-size:0.75rem;">Phone</span><span style="font-size:0.75rem; color:#64748B;">+91 98765 43210</span></div></div></div>` }
+                ],
+                logging: [
+                    { title: "1. Session Logout", desc: "Logout verification modal", html: `<div class="screen-body" style="justify-content:center; text-align:center;"><div class="screen-title-mock">Logout?</div><p style="font-size:0.7rem; color:#64748B; margin-top: 5px;">Are you sure you want to end your gaming session?</p><div class="d-flex gap-2 mt-4"><div class="screen-btn-mock" style="background:#475569; margin-top:0;">Cancel</div><div class="screen-btn-mock" style="background:#EF4444; margin-top:0;">Logout</div></div></div>` }
+                ]
+            };
+
+            const gallery = document.getElementById("flowsGallery");
+            const countText = document.getElementById("flowsCountText");
+            const menuItems = document.querySelectorAll(".flows-menu-item");
+            const searchInput = document.getElementById("flowsSearchInput");
+            const scrollLeftBtn = document.getElementById("scrollLeftBtn");
+            const scrollRightBtn = document.getElementById("scrollRightBtn");
+
+            let currentFlow = "onboarding";
+
+            function renderFlow(flowKey) {
+                currentFlow = flowKey;
+                const screens = flowsData[flowKey] || [];
+                gallery.innerHTML = "";
+                
+                screens.forEach((screen, index) => {
+                    const cardHtml = `
+                        <div class="screen-card-container">
+                            <div class="screen-card">
+                                <div class="screen-notch"></div>
+                                <div class="screen-status-bar">
+                                    <span>9:41</span>
+                                    <div class="screen-status-icons">
+                                        <i class="fa-solid fa-signal"></i>
+                                        <i class="fa-solid fa-wifi"></i>
+                                        <i class="fa-solid fa-battery-full"></i>
+                                    </div>
+                                </div>
+                                ${screen.html}
+                                <div class="screen-home-indicator"></div>
+                            </div>
+                            <div class="screen-info">
+                                <div class="screen-info-title">${screen.title}</div>
+                                <div class="screen-info-desc">${screen.desc}</div>
+                            </div>
+                        </div>
+                    `;
+                    gallery.insertAdjacentHTML("beforeend", cardHtml);
+                });
+
+                countText.textContent = `Showing ${screens.length} screen${screens.length > 1 ? 's' : ''}`;
+                updateScrollButtons();
+            }
+
+            menuItems.forEach(item => {
+                item.addEventListener("click", function() {
+                    menuItems.forEach(m => m.classList.remove("active"));
+                    this.classList.add("active");
+                    renderFlow(this.getAttribute("data-flow"));
+                });
+            });
+
+            searchInput.addEventListener("input", function() {
+                const query = this.value.toLowerCase().trim();
+                const listItems = document.querySelectorAll("#flowsMenuList .flows-menu-item");
+                
+                listItems.forEach(item => {
+                    const text = item.querySelector("span").textContent.toLowerCase();
+                    if (text.includes(query)) {
+                        item.style.display = "flex";
+                    } else {
+                        item.style.display = "none";
+                    }
+                });
+            });
+
+            scrollRightBtn.addEventListener("click", function() {
+                gallery.scrollBy({ left: 240, behavior: 'smooth' });
+            });
+
+            scrollLeftBtn.addEventListener("click", function() {
+                gallery.scrollBy({ left: -240, behavior: 'smooth' });
+            });
+
+            function updateScrollButtons() {
+                setTimeout(() => {
+                    const scrollLeft = gallery.scrollLeft;
+                    const maxScroll = gallery.scrollWidth - gallery.clientWidth;
+
+                    if (scrollLeft > 10) {
+                        scrollLeftBtn.classList.remove("d-none");
+                    } else {
+                        scrollLeftBtn.classList.add("d-none");
+                    }
+
+                    if (scrollLeft < maxScroll - 10 && maxScroll > 0) {
+                        scrollRightBtn.classList.remove("d-none");
+                    } else {
+                        scrollRightBtn.classList.add("d-none");
+                    }
+                }, 100);
+            }
+
+            gallery.addEventListener("scroll", updateScrollButtons);
+            window.addEventListener("resize", updateScrollButtons);
+            renderFlow("onboarding");
+        });
+    </script>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

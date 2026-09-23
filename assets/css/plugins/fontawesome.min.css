@@ -284,11 +284,11 @@
         -webkit-animation-iteration-count: 1;
         animation-iteration-count: 1;
         -webkit-transition-delay: 0s;
-             -o-transition-delay: 0s;
-                transition-delay: 0s;
+        -o-transition-delay: 0s;
+        transition-delay: 0s;
         -webkit-transition-duration: 0s;
-             -o-transition-duration: 0s;
-                transition-duration: 0s
+        -o-transition-duration: 0s;
+        transition-duration: 0s
     }
 }
 
@@ -579,44 +579,44 @@
 .fa-rotate-90 {
     -webkit-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
-        transform: rotate(90deg)
+    transform: rotate(90deg)
 }
 
 .fa-rotate-180 {
     -webkit-transform: rotate(180deg);
     -ms-transform: rotate(180deg);
-        transform: rotate(180deg)
+    transform: rotate(180deg)
 }
 
 .fa-rotate-270 {
     -webkit-transform: rotate(270deg);
     -ms-transform: rotate(270deg);
-        transform: rotate(270deg)
+    transform: rotate(270deg)
 }
 
 .fa-flip-horizontal {
     -webkit-transform: scaleX(-1);
     -ms-transform: scaleX(-1);
-        transform: scaleX(-1)
+    transform: scaleX(-1)
 }
 
 .fa-flip-vertical {
     -webkit-transform: scaleY(-1);
     -ms-transform: scaleY(-1);
-        transform: scaleY(-1)
+    transform: scaleY(-1)
 }
 
 .fa-flip-both,
 .fa-flip-horizontal.fa-flip-vertical {
     -webkit-transform: scale(-1);
     -ms-transform: scale(-1);
-        transform: scale(-1)
+    transform: scale(-1)
 }
 
 .fa-rotate-by {
     -webkit-transform: rotate(var(--fa-rotate-angle, none));
     -ms-transform: rotate(var(--fa-rotate-angle, none));
-        transform: rotate(var(--fa-rotate-angle, none))
+    transform: rotate(var(--fa-rotate-angle, none))
 }
 
 .fa-stack {
@@ -3062,7 +3062,8 @@
 }
 
 .fa-chevron-right:before {
-    content: "\f054"
+    content: "\f054";
+    font-size: 12px;
 }
 
 .fa-chevron-up:before {
@@ -3602,6 +3603,7 @@
 
 .fa-citrus:before {
     content: "\e2f4"
+
 }
 
 .fa-citrus-slice:before {
@@ -14774,8 +14776,9 @@
 }
 
 .fa-square-x-twitter:before {
-    content: "\e61a"; }
-    
+    content: "\e61a";
+}
+
 .fa-twitter:before {
     content: "\f099"
 }
@@ -15099,7 +15102,7 @@
     left: 50%;
     -webkit-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
-        transform: translateX(-50%)
+    transform: translateX(-50%)
 }
 
 .fa-duotone.fa-0:after,

@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/port/fav.png">
+    <title>Case Study: KRS CRM | Rohit Singh - UI/UX Designer</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-bg: #FFFFFF;
+            --text-main: #1E293B;
+            --text-secondary: #64748B;
+            --accent-purple: #4A148C;
+            /* Deep purple matching design overlay */
+            --accent-purple-light: #DDD6FE;
+            --link-color: #007ACC;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--primary-bg);
+            background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Navigation */
+        .rts-header {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #000000;
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .site-logo:hover {
+            opacity: 0.8;
+            color: #000000;
+        }
+
+        .nav-link-custom {
+            color: #000000 !important;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link-custom:hover {
+            color: var(--text-secondary) !important;
+        }
+
+        /* Main Container Card Banner */
+        .hero-banner-card {
+            background: #FFFFFF;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .banner-flex-container {
+            display: flex;
+            position: relative;
+            min-height: 380px;
+        }
+
+        /* Image part of the banner */
+        .banner-image-container {
+            flex: 1;
+            position: relative;
+            background-color: #E2E8F0;
+        }
+
+        .banner-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 380px;
+        }
+
+        /* Purple overlay on the left */
+        .banner-overlay {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+            /* Covers half of the banner */
+            background-color: rgba(74, 20, 140, 0.95);
+            /* Deep rich purple opacity */
+            border-top-right-radius: 80px;
+            /* Rounded top-right curve as shown in the design image */
+            color: #FFFFFF;
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .banner-badge {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.9);
+            display: inline-block;
+        }
+
+        .banner-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: #FFFFFF;
+            margin: 0;
+        }
+
+        /* Details Section */
+        .details-section {
+            margin-top: 20px;
+            padding-bottom: 80px;
+        }
+
+        .details-title-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .details-company-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .company-link {
+            color: var(--link-color);
+            text-decoration: underline;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: opacity 0.2s ease;
+        }
+
+        .company-link:hover {
+            opacity: 0.8;
+            color: var(--link-color);
+        }
+
+        .description-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 991px) {
+            .banner-overlay {
+                width: 65%;
+                padding: 40px 30px;
+            }
+
+            .banner-title {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .banner-flex-container {
+                flex-direction: column-reverse;
+            }
+
+            .banner-overlay {
+                position: relative;
+                width: 100%;
+                border-top-right-radius: 0;
+                border-bottom-left-radius: 0;
+                padding: 30px 20px;
+            }
+
+            .banner-image {
+                min-height: 250px;
+            }
+        }
+
+        /* Roles Flowchart Styles */
+        .roles-section {
+            margin-top: 80px;
+            margin-bottom: 60px;
+        }
+
+        .roles-title-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .roles-flow-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            position: relative;
+        }
+
+        /* Connecting lines */
+        .roles-flow-grid::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            border-top: 2px dashed #CBD5E1;
+            z-index: 1;
+        }
+
+        .role-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .role-column::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            width: 2px;
+            height: 20px;
+            border-left: 2px dashed #CBD5E1;
+            z-index: 1;
+        }
+
+        /* Role Header Cards */
+        .role-header-card {
+            background: #FFFFFF;
+            border: 2px solid #E2E8F0;
+            border-radius: 16px;
+            padding: 20px;
+            width: 100%;
+            max-width: 160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .role-header-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .role-icon-wrapper {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .role-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* Specific Colors */
+        /* Main Head: Blue */
+        .role-column.main-head .role-header-card {
+            border-color: #DBEAFE;
+            background: #EFF6FF;
+        }
+
+        .role-column.main-head .role-icon-wrapper {
+            background: #DBEAFE;
+            color: #1D4ED8;
+        }
+
+        .role-column.main-head .role-title {
+            color: #1D4ED8;
+        }
+
+        /* Branch Owner: Purple */
+        .role-column.branch-owner .role-header-card {
+            border-color: #F3E8FF;
+            background: #FAF5FF;
+        }
+
+        .role-column.branch-owner .role-icon-wrapper {
+            background: #F3E8FF;
+            color: #7E22CE;
+        }
+
+        .role-column.branch-owner .role-title {
+            color: #7E22CE;
+        }
+
+        /* Agent: Green */
+        .role-column.agent .role-header-card {
+            border-color: #DCFCE7;
+            background: #F0FDF4;
+        }
+
+        .role-column.agent .role-icon-wrapper {
+            background: #DCFCE7;
+            color: #15803D;
+        }
+
+        .role-column.agent .role-title {
+            color: #15803D;
+        }
+
+        /* Employee: Orange */
+        .role-column.employee .role-header-card {
+            border-color: #FFEDD5;
+            background: #FFF7ED;
+        }
+
+        .role-column.employee .role-icon-wrapper {
+            background: #FFEDD5;
+            color: #C2410C;
+        }
+
+        .role-column.employee .role-title {
+            color: #C2410C;
+        }
+
+        /* Student: Violet */
+        .role-column.student .role-header-card {
+            border-color: #E0E7FF;
+            background: #EEF2FF;
+        }
+
+        .role-column.student .role-icon-wrapper {
+            background: #E0E7FF;
+            color: #4338CA;
+        }
+
+        .role-column.student .role-title {
+            color: #4338CA;
+        }
+
+        /* Vertical Connector Line between Header Card and Permissions List */
+        .card-connector-line {
+            width: 2px;
+            height: 30px;
+            border-left: 2px dashed #CBD5E1;
+            margin: 0 auto;
+        }
+
+        /* Permissions Card */
+        .role-permissions-card {
+            border: 2px dashed #E2E8F0;
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 15px;
+            width: 100%;
+            max-width: 160px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.01);
+        }
+
+        .permission-item {
+            font-size: 0.85rem;
+            color: var(--text-main);
+            font-weight: 500;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .permission-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Business Mode Styles */
+        .business-mode-container {
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            background-color: #FFFFFF;
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 60px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+        }
+
+        .business-mode-title {
+            color: #004ecc;
+            font-weight: 800;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .business-mode-cards-row {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .business-card {
+            flex: 1;
+            max-width: 380px;
+            border-radius: 14px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .business-card.study-abroad {
+            background-color: #EBF5FF;
+            border: 1px solid #BFDBFE;
+            color: #1E40AF;
+        }
+
+        .business-card.study-abroad:hover {
+            background-color: #DBEAFE;
+            transform: translateY(-2px);
+        }
+
+        .business-card.visa-services {
+            background-color: #FFF7ED;
+            border: 1px solid #FED7AA;
+            color: #C2410C;
+        }
+
+        .business-card.visa-services:hover {
+            background-color: #FFEDD5;
+            transform: translateY(-2px);
+        }
+
+        .business-card-icon {
+            font-size: 1.8rem;
+        }
+
+        .business-card-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        /* Responsive Grid adjustments */
+        @media (max-width: 991px) {
+            .roles-flow-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+            }
+
+            .roles-flow-grid::before {
+                display: none;
+            }
+
+            .role-column::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .roles-flow-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .business-mode-cards-row {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .business-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER AREA -->
+    <header class="rts-header py-4">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="index.html" class="site-logo text-decoration-none">R</a>
+                <nav class="d-flex align-items-center gap-4">
+                    <a href="https://www.linkedin.com/in/rohitsinghuiux/" target="_blank"
+                        class="nav-link-custom">Linkedin</a>
+                    <a href="https://www.youtube.com/@RohitUXD/" target="_blank" class="nav-link-custom">Youtube</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENT WRAPPER -->
+    <main class="container my-5 flex-grow-1">
+
+        <!-- Large Banner Image Card -->
+        <div class="hero-banner-card">
+            <div class="banner-flex-container">
+
+                <!-- Purple Overlay on the left -->
+                <div class="banner-overlay">
+                    <span class="banner-badge">Case Study • UI/UX Design</span>
+                    <h2 class="banner-title">Transforming an Enterprise CRM into a Role-Based Mobile Experience for
+                        study abroad & visa consultants</h2>
+                </div>
+
+                <!-- Banner Image on the right -->
+                <div class="banner-image-container">
+                    <!-- High quality student photo matching user's reference mockup -->
+                    <img src="assets/pt/header.png" alt="Students Graduating" class="banner-image">
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Lower Metadata / Overview Row -->
+        <section class="details-section">
+            <div class="row gy-4">
+                <div class="col-md-4">
+                    <div class="details-title-label">Company Overview</div>
+                    <h3 class="details-company-name">KRS Infotech <br />Wave Silver Tower, Sec-18 Noida</h3>
+
+                </div>
+                <div class="col-md-8">
+                    <p class="description-text">
+                        Steps. Venerable, trade, need do target. And separated his decision-making. Is written to
+                        wellfeigned a mad universe proposal the process that step uninspired, claim free preceding rung.
+                        State beginning a that cache who ticking
+                    </p>
+                    <p class="description-text">
+                        Steps. Venerable, trade, need do target. And separated his decision-making. Is written to
+                        wellfeigned a mad universe proposal the process that step uninspired, claim free preceding rung.
+                        State beginning a that cache who ticking
+                    </p>
+                    <a href="#" class="company-link">Company Website</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roles Section -->
+        <section class="roles-section">
+            <h3 class="text-center mb-5"
+                style="font-weight: 800; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-main);">
+                Product Ecosystem</h3>
+            <div class="roles-flow-grid">
+                <!-- Main Head Column -->
+                <div class="role-column main-head">
+                    <div class="role-header-card">
+                        <div class="role-icon-wrapper">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <h4 class="role-title">Main Head</h4>
+                    </div>
+                    <div class="card-connector-line"></div>
+                    <div class="role-permissions-card">
+                        <span class="permission-item">Full Access</span>
+                        <span class="permission-item">All Branches</span>
+                        <span class="permission-item">Reports</span>
+                        <span class="permission-item">Analytics</span>
+                    </div>
+                </div>
+
+                <!-- Branch Owner Column -->
+                <div class="role-column branch-owner">
+                    <div class="role-header-card">
+                        <div class="role-icon-wrapper">
+                            <i class="fa-solid fa-user-gear"></i>
+                        </div>
+                        <h4 class="role-title">Branch Owner</h4>
+                    </div>
+                    <div class="card-connector-line"></div>
+                    <div class="role-permissions-card">
+                        <span class="permission-item">Branch Overview</span>
+                        <span class="permission-item">Staff Performance</span>
+                        <span class="permission-item">Reports</span>
+                    </div>
+                </div>
+
+                <!-- Agent Column -->
+                <div class="role-column agent">
+                    <div class="role-header-card">
+                        <div class="role-icon-wrapper">
+                            <i class="fa-solid fa-user-pen"></i>
+                        </div>
+                        <h4 class="role-title">Agent</h4>
+                    </div>
+                    <div class="card-connector-line"></div>
+                    <div class="role-permissions-card">
+                        <span class="permission-item">Students</span>
+                        <span class="permission-item">Applications</span>
+                        <span class="permission-item">Follow-ups</span>
+                        <span class="permission-item">Tasks</span>
+                    </div>
+                </div>
+
+                <!-- Employee Column -->
+                <div class="role-column employee">
+                    <div class="role-header-card">
+                        <div class="role-icon-wrapper">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+                        <h4 class="role-title">Employee</h4>
+                    </div>
+                    <div class="card-connector-line"></div>
+                    <div class="role-permissions-card">
+                        <span class="permission-item">Assigned Students</span>
+                        <span class="permission-item">Tasks</span>
+                        <span class="permission-item">Follow-ups</span>
+                    </div>
+                </div>
+
+                <!-- Student Column -->
+                <div class="role-column student">
+                    <div class="role-header-card">
+                        <div class="role-icon-wrapper">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <h4 class="role-title">Student</h4>
+                    </div>
+                    <div class="card-connector-line"></div>
+                    <div class="role-permissions-card">
+                        <span class="permission-item">My Profile</span>
+                        <span class="permission-item">Applications</span>
+                        <span class="permission-item">Documents</span>
+                        <span class="permission-item">Status</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Business Mode Section -->
+        <section class="business-mode-container mb-5">
+            <h3 class="business-mode-title">Modules</h3>
+            <div class="business-mode-cards-row">
+                <a href="#" class="business-card study-abroad text-decoration-none">
+                    <span class="business-card-icon"><i class="fa-solid fa-globe"></i></span>
+                    <span class="business-card-title">Study Abroad</span>
+                </a>
+                <a href="#" class="business-card visa-services text-decoration-none">
+                    <span class="business-card-icon"><i class="fa-solid fa-passport"></i></span>
+                    <span class="business-card-title">Visa Services</span>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="py-4 text-center"
+        style="background: #FAFAFA; color: var(--text-secondary); font-size: 0.875rem; border-top: 1px solid rgba(0,0,0,0.05);">
+        <div class="container">
+            <p class="m-0">© ROHIT SINGH - Case Study Detail</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

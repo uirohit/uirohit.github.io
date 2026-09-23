@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/port/fav.png">
+    <title>Rohit Singh - UI/UX Designer with 4.5+ Years of Experience</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0ET9P6G5W8"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-0ET9P6G5W8');
+    </script>
+    <!-- bootstrap css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- <link rel="stylesheet preload" href="assets/css/vendor/bootstrap.min.css" as="style"> -->
+
+    <!-- fontawesome css -->
+    <link rel="stylesheet preload" href="assets/css/plugins/fontawesome.min.css" as="style">
+    <!-- swiper css -->
+    <!-- <link rel="stylesheet preload" href="assets/css/plugins/swiper.min.css" as="style"> -->
+    <!-- magnific popup css -->
+    <!-- <link rel="stylesheet preload" href="assets/css/plugins/magnific-popup.css" as="style"> -->
+    <!-- aos css -->
+    <!-- <link  rel="stylesheet preload" href="assets/css/plugins/aos.min.css" as="style"> -->
+    <link rel="stylesheet preload" href="assets/css/plugins/sal.min.css" as="style">
+    <!-- nice select css -->
+    <link rel="stylesheet preload" href="assets/css/plugins/nice-select.css" as="style">
+    <!-- metismenu css -->
+    <!-- <link rel="stylesheet preload" href="assets/css/plugins/metismenu.css" as="style"> -->
+    <!-- Custom css -->
+    <link rel="stylesheet preload" href="assets/css/style2.css" as="style">
+    <link rel="stylesheet preload" href="assets/css/locomotive.css" as="style">
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.18/dist/lenis.css">
+
+
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"> -->
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+
+    <!-- 
+<link rel="preconnect" href="https://rsms.me/">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css"> -->
+
+    <!-- THEME PRELOADER START -->
+    <!-- THEME PRELOADER START -->
+    <div class="loader-wrapper">
+        <div class="loader">
+        </div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <!-- THEME PRELOADER END -->
+
+    <!-- THEME PRELOADER END -->
+    <style>
+        .inter-<uniquifier> {
+            font-family: "Inter", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: <weight>;
+            font-style: normal;
+            font-variation-settings:
+                "slnt" 0;
+        }
+
+
+
+        /* styles.css */
+        /*.preload1 .element {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
+
+.element {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.element.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+*/
+
+        /* Element to animate from the center */
+        .center-element {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            /* Adjust the size as needed */
+            height: 150px;
+            /* Adjust the size as needed */
+            background-color: rgba(255, 255, 255, 1);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+            font-size: 1.2em;
+            border-radius: 50%;
+            opacity: 0;
+            animation: appearFromCenter 1s forwards;
+            animation-delay: 2.0s;
+            /* Delay of 1 second */
+
+        }
+
+        /* Animation keyframes for element coming from the center */
+        @keyframes appearFromCenter {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+
+    <style type="text/css">
+        /*   .rts-hero__four {
+    opacity: 1; 
+}
+*/
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 10px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu-item {
+            margin: 0 15px;
+            position: relative;
+        }
+
+        .menu-item a {
+            text-decoration: none;
+            color: #000;
+            padding: 10px;
+        }
+
+        .menu-item a:hover {
+            /*  background-color: #e2e6ea;
+      border-radius: 5px;*/
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            min-width: 200px;
+            border-radius: 5px;
+        }
+
+        .dropdown-content a {
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+            color: #000;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #0f5ca7;
+            color: #fff;
+        }
+
+        .menu-item:hover .dropdown-content {
+            display: block;
+        }
+
+        .navbar-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .navbar-button:hover {
+            background-color: #0056b3;
+        }
+
+        .zupee-banner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 82, 255, 0.25) !important;
+        }
+
+        .zupee-banner-card:hover .banner-mockup-phone {
+            transform: rotate(0deg) translateY(10px) scale(1.05) !important;
+        }
+
+        .profile-photo {
+            /* width: 112px;
+      height: 112px;
+      margin: 0 auto 20px;
+      border: 4px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 8px 24px rgba(15, 92, 167, 0.18);
+      object-fit: cover; */
+        }
+    </style>
+
+
+    <script>
+        //     window.addEventListener('load', function() {
+        //     var hero = document.getElementById('hero2');
+        //     var centerelement = document.getElementById('hero3');
+        //     hero.classList.add('rts-hero-four');
+        //     hero.classList.add('rts-hero__four');
+        //     centerelement.classList.add('center-element');
+        // });
+
+    </script>
+
+    <!-- <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js?ver=3.3.2'>
+$(window).on('load', function() {
+  $('body').removeClass('preload1');
+  $('.element').addClass('visible');
+});
+</script> -->
+
+
+<body class="" style="background-image: radial-gradient(#dadada 1px, #fff 1px);
+    -webkit-background-size: 20px 20px;">
+
+
+
+    <!-- HEADER AREA -->
+    <header class="rts-header style-six header__default" style="background: #fff;">
+        <div class="container container2">
+            <div class="row">
+                <div class="rts-header__wrapper">
+                    <!-- FOR LOGO -->
+
+                    <div class="rts-header__logo">
+                        <a href="index.php" class="site-logo">
+                            <img src="assets/images/r-logo.svg" alt="R" width="20">
+                        </a>
+                    </div>
+                    <!-- FOR NAVIGATION MENU -->
+
+
+                    <!-- FOR HEADER RIGHT -->
+                    <div class="rts-header__right">
+
+                        <nav class="rts-header__menu mb" id="mobile-menu">
+                            <div class="FDC-menu">
+                                <ul class="list-unstyled FDC-desktop-menu">
+
+
+
+
+
+
+                                    <li class="menu-item"><a href="https://www.linkedin.com/in/rohitsinghuiux/"
+                                            target="_blank" class="FDC-dropdown-main-element">Linkedin</a></li>
+                                    <li class="menu-item"><a href="https://www.youtube.com/@RohitUXD/" target="_blank"
+                                            class="FDC-dropdown-main-element">Youtube</a></li>
+
+
+
+
+
+
+                                </ul>
+
+                            </div>
+
+                        </nav>
+                        <!--  <div class="button-area">
+                     
+                            <a href="contact-us.php" class="get-started__btn" style="text-transform: uppercase;">Resume </a>
+
+                        </div> -->
+                        <button id="menu-btn" class="mobile__active menu-btn"><i
+                                class="fa-sharp fa-solid fa-bars"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    </head>
+
+
+
+    <section class="rts-faq section__padding rts-brand rts-brand__bg--section "
+        style="background-image: linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url(assets/images/portfolio/bg.png); background-size: cover; background-position: center;">
+        <div class="container container2">
+            <div class="align-items-center row">
+                <div class="col-lg-8 offset-lg-2 text-center">
+
+                    <div class="rts-faq__first rts-faq__first2" style="max-width: 620px;margin: auto;">
+                        <img src="assets/images/portfolio/rs-image.png" alt="Rohit Singh" class="profile-photo">
+                        <p class="offer">Hello i’m rohit</p>
+
+                        <h2 class="title sal-animate" data-sal="slide-down" data-sal-delay="300"
+                            data-sal-duration="800">
+                            8 years crafting digital experiences across Fintech, EdTech, E-commerce, Study Abroad,
+                            Immigration & Travel.
+                        </h2>
+
+
+                        <p data-sal="slide-down" data-sal-delay="200" data-sal-duration="800" class="sal-animate">Open
+                            for full time opportunities only</p>
+
+                        <br />
+
+
+                        <a href="rohit-singh-cv-uidesigner.pdf" class="rts-btn rts-btn-primary support-btn"
+                            target="_blank">Download CV </a>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+
+        </div><br /><br />
+
+
+
+
+
+
+
+
+
+    </section>
+
+    <section class="rts-blog pt-80">
+        <div class="container container2">
+
+
+
+
+
+            <div class="col-lg-12">
+                <div class="rts-faq__first rts-faq__first2">
+                    <div class="">
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                <img src="assets/images/port/portfolio.svg" alt="" class="d-inline">
+                                <h2 class="section-title sal-animate d-inline align-middle" data-sal="slide-down"
+                                    data-sal-delay="400" data-sal-duration="700" style="    font-size: 28px;">&nbsp;
+
+
+
+
+                                    Work Experience</h2><br /><br /><br />
+
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+            <div class="col-lg-12">
+                <div class="rts-faq__first rts-faq__first2">
+                    <div class="">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <p class="offer">April 2026 - Aug 2026 - Contract</p>
+
+                                <h2 class="section-title sal-animate" data-sal="slide-down" data-sal-delay="400"
+                                    data-sal-duration="700">Mapr</h2>
+
+                            </div>
+                            <div class="col-lg-6" style="">
+                                <!-- <p class="description mb-0 sal-animate" data-sal="slide-down" data-sal-delay="500" data-sal-duration="800">Designed online identity for their new venture “Fortune Data Centres". Here i worked with their Digital Marketing team & Project Manager.</p><br /><br /> -->
+
+                                <!-- <p class="description mb-0 sal-animate" data-sal="slide-down" data-sal-delay="500" data-sal-duration="800">Online corporate identity for their new venture “Fortune Data Centres” Here i worked with software.</p><br /> -->
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-sm-center justify-content-md-start g-30">
+
+
+
+                <div class="col-lg-12 col-md-12 col-sm-12" style="">
+                    <div class="rts-blog__single">
+                        <a href="#">
+                            <img class="blog__thumb" src="assets/images/portfolio/tot.jpg" alt="blog post thumb">
+                        </a>
+                        <div class="rts-blog__single--meta">
+
+                            <a href="#" class="title">Edtech Platform</a>
+                            <div class="rts-blog__single--author">
+                                <!--      <div class="author">
+                                    <img src="assets/images/author/author__two.png" alt="">
+                                </div> -->
+                                <div class="author__content">
+
+                                    <p class="description"> Competitors visual pattern analysis, Defining typescale,
+                                        color, custom icons & illustration, Layout. Designed using Figma & Photoshop.
+                                    </p>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+                            <div class="rts-hero__content--group sal-animate" data-sal="slide-down" data-sal-delay="500"
+                                data-sal-duration="800">
+
+
+                                <a href="fdc/CompanyProfile.pdf#zoom=33" target="_blank"
+                                    class="primary__btn white__bg white__bg" target="_blank">Case Study <i
+                                        class="fa-regular fa-long-arrow-right"></i></a>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="rts-blog__single">
+                        <a href="#">
+                            <img class="blog__thumb" src="assets/images/portfolio/maprthumbnail.jpg"
+                                alt="fortune-website-mockup">
+                        </a>
+                        <div class="rts-blog__single--meta">
+
+                            <a href="#" class="title">Trading Platform </a>
+                            <div class="rts-blog__single--author">
+
+                                <div class="author__content">
+
+                                    <p class="description">Conducting competitive analysis, Defining typescale, color,
+                                        iconography. Creating wireframes in figma & developed using bootstrap</p>
+
+                                </div>
+                            </div>
+
+
+                            <div class="rts-hero__content--group sal-animate" data-sal="slide-down" data-sal-delay="500"
+                                data-sal-duration="800">
+                                <a href="fdc/index.html" target="_blank" class="primary__btn white__bg  white__bg">Case
+                                    Study <i class="fa-regular fa-long-arrow-right"></i></a>
+
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="rts-blog pt-80">
+        <div class="container container2">
+
+
+
+
+            <br /><br />
+
+
+
+
+
+
+
+            <div class="col-lg-12">
+                <div class="rts-faq__first rts-faq__first2">
+                    <div class="">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <p class="offer">April 2024 - May 2024 - ONSITE</p>
+
+                                <h2 class="section-title sal-animate" data-sal="slide-down" data-sal-delay="400"
+                                    data-sal-duration="700">KRS Infotech</h2>
+
+                            </div>
+                            <div class="col-lg-6" style="">
+                                <!-- <p class="description mb-0 sal-animate" data-sal="slide-down" data-sal-delay="500" data-sal-duration="800">Designed online identity for their new venture “Fortune Data Centres". Here i worked with their Digital Marketing team & Project Manager.</p><br /><br /> -->
+
+                                <!-- <p class="description mb-0 sal-animate" data-sal="slide-down" data-sal-delay="500" data-sal-duration="800">Online corporate identity for their new venture “Fortune Data Centres” Here i worked with software.</p><br /> -->
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-sm-center justify-content-md-start g-30">
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="rts-blog__single">
+                        <a href="#">
+                            <img class="blog__thumb" src="assets/images/portfolio/apps.jpg"
+                                alt="fortune-website-mockup">
+                        </a>
+                        <div class="rts-blog__single--meta">
+
+                            <a href="#" class="title">Mobile CRM </a>
+                            <div class="rts-blog__single--author">
+
+                                <div class="author__content">
+
+                                    <p class="description">Conducting competitive analysis, Defining typescale, color,
+                                        iconography. Creating wireframes in figma & developed using bootstrap</p>
+
+                                </div>
+                            </div>
+
+
+                            <div class="rts-hero__content--group sal-animate" data-sal="slide-down" data-sal-delay="500"
+                                data-sal-duration="800">
+                                <a href="fdc/index.html" target="_blank" class="primary__btn white__bg  white__bg">Case
+                                    Study <i class="fa-regular fa-long-arrow-right"></i></a>
+
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12" style="">
+                    <div class="rts-blog__single">
+                        <a href="#">
+                            <img class="blog__thumb" src="assets/images/portfolio/2.jpg" alt="blog post thumb">
+                        </a>
+                        <div class="rts-blog__single--meta">
+
+                            <a href="#" class="title">Visual Design</a>
+                            <div class="rts-blog__single--author">
+                                <!--      <div class="author">
+                                    <img src="assets/images/author/author__two.png" alt="">
+                                </div> -->
+                                <div class="author__content">
+
+                                    <p class="description"> Competitors visual pattern analysis, Defining typescale,
+                                        color, custom icons & illustration, Layout. Designed using Figma & Photoshop.
+                                    </p>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+                            <div class="rts-hero__content--group sal-animate" data-sal="slide-down" data-sal-delay="500"
+                                data-sal-duration="800">
+
+
+                                <a href="fdc/CompanyProfile.pdf#zoom=33" target="_blank"
+                                    class="primary__btn white__bg white__bg" target="_blank">View Details <i
+                                        class="fa-regular fa-long-arrow-right"></i></a>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+    </section>
+
+
+
+
+    <section class="rts-blog pt-80">
+        <div class="container container2">
+
+
+
+
+            <br /><br />
+
+
+
+
+
+
+
+            <div class="col-lg-12">
+                <div class="rts-faq__first rts-faq__first2">
+                    <div class="">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <p class="offer">April 2024 - May 2024 - Contract 1</p>
+
+                                <h2 class="section-title sal-animate" data-sal="slide-down" data-sal-delay="400"
+                                    data-sal-duration="700">Fortune Group</h2>
+
+                            </div>
+                            <div class="col-lg-6" style="">
+                                <!-- <p class="description mb-0 sal-animate" data-sal="slide-down" data-sal-delay="500" data-sal-duration="800">Designed online identity for their new venture “Fortune Data Centres". Here i worked with their Digital Marketing team & Project Manager.</p><br /><br /> -->
+
+                                <!-- <p class="description mb-0 sal-animate" data-sal="slide-down" data-sal-delay="500" data-sal-duration="800">Online corporate identity for their new venture “Fortune Data Centres” Here i worked with software.</p><br /> -->
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-sm-center justify-content-md-start g-30">
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="rts-blog__single">
+                        <a href="#">
+                            <img class="blog__thumb" src="assets/images/port/fortune-mockup.jpg"
+                                alt="fortune-website-mockup">
+                        </a>
+                        <div class="rts-blog__single--meta">
+
+                            <a href="#" class="title">Website </a>
+                            <div class="rts-blog__single--author">
+
+                                <div class="author__content">
+                                    <span>Key Deliverables</span>
+                                    <p class="description">Conducting competitive analysis, Defining typescale, color,
+                                        iconography. Creating wireframes in figma & developed using bootstrap</p>
+
+                                </div>
+                            </div>
+
+
+                            <div class="rts-hero__content--group sal-animate" data-sal="slide-down" data-sal-delay="500"
+                                data-sal-duration="800">
+                                <a href="fdc/index.html" target="_blank" class="primary__btn white__bg  white__bg">View
+                                    Live <i class="fa-regular fa-long-arrow-right"></i></a>
+
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12" style="">
+                    <div class="rts-blog__single">
+                        <a href="#">
+                            <img class="blog__thumb" src="assets/images/port/6.jpg" alt="blog post thumb">
+                        </a>
+                        <div class="rts-blog__single--meta">
+
+                            <a href="#" class="title">Business Presentation</a>
+                            <div class="rts-blog__single--author">
+                                <!--      <div class="author">
+                                    <img src="assets/images/author/author__two.png" alt="">
+                                </div> -->
+                                <div class="author__content">
+                                    <span class="des_heading">Key Deliverables </span>
+                                    <p class="description"> Competitors visual pattern analysis, Defining typescale,
+                                        color, custom icons & illustration, Layout. Designed using Figma & Photoshop.
+                                    </p>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+                            <div class="rts-hero__content--group sal-animate" data-sal="slide-down" data-sal-delay="500"
+                                data-sal-duration="800">
+
+
+                                <a href="fdc/CompanyProfile.pdf#zoom=33" target="_blank"
+                                    class="primary__btn white__bg white__bg" target="_blank">View Live <i
+                                        class="fa-regular fa-long-arrow-right"></i></a>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <section class="rts-blog pt-120 quantum4u-section">
+        <div class="container container2">
+
+            <div class="col-lg-12">
+                <div class="rts-faq__first rts-faq__first2">
+                    <div class="">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <p class="offer">Oct 2017 - Jan 2022</p>
+
+                                <h2 class="section-title sal-animate" data-sal="slide-down" data-sal-delay="400"
+                                    data-sal-duration="700">Quantum4u</h2>
+
+                            </div>
+                            <!-- <div class="col-lg-6" style="padding-top: 34px;"> -->
+                            <div class="col-lg-6">
+                                <!-- <p class="description mb-0 sal-animate" data-sal="slide-down" data-sal-delay="500" data-sal-duration="800">I joined Quantum4U as a Mid-Level Designer and was promoted to Senior Designer in 2021. I collaborated closely with software developers (Android, iOS, and Backend), the marketing team, and clients </p><br /> -->
+
+                                <!-- <p class="description mb-0 sal-animate" data-sal="slide-down" data-sal-delay="500" data-sal-duration="800">The Company has total 300M + Downloads from multiple Playstore accounts. Here are some
+                                      <a href="https://play.google.com/store/apps/dev?id=5377048679909319186" target="_blank" class="linkcol">Quantum4u</a>,    <a href="https://play.google.com/store/apps/dev?id=5260266383047667744" target="_blank" class="linkcol">Q4U Mobile Apps</a>,    <a href="https://play.google.com/store/apps/dev?id=6530745665403757394" target="_blank" class="linkcol">M24 Apps</a>,    <a href="https://play.google.com/store/apps/dev?id=9038864615989079188" target="_blank" class="linkcol">AppNextG</a>
+                                    </p><br /><br /> -->
+
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="quantum4u-carousel">
+                <button class="quantum4u-carousel__arrow quantum4u-carousel__arrow--prev" type="button"
+                    aria-label="Show previous Quantum4u projects">
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                </button>
+                <div class="row justify-content-sm-center justify-content-md-start g-30 quantum4u-cards"
+                    aria-label="Quantum4u projects">
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="rts-blog__single">
+                            <a href="#">
+                                <img class="blog__thumb" src="assets/images/port/ps1.png" alt="">
+                            </a>
+                            <div class="rts-blog__single--meta">
+                                <div class="cat__date">
+                                    <span class="cat offer">5M + Downloads </span>
+
+                                </div>
+                                <span class="title">PhoneSwitch </span>
+                                <div class="author__content">
+                                    <!-- <a href="#">Tasks Handled</a> -->
+                                    <p>Transfer data from Android to iOS using Smart Switch</p>
+
+                                </div>
+                                <div class="rts-blog__single--author">
+                                    <!--  <div class="author">
+                                    <img src="assets/images/author/author__one.png" alt="">
+                                </div> -->
+
+
+                                </div>
+
+
+                                <div class="rts-hero__content--group sal-animate" data-sal="slide-down"
+                                    data-sal-delay="500" data-sal-duration="800">
+                                    <a href="https://play.google.com/store/apps/details?id=com.quantum.poleshare"
+                                        target="_blank" class="primary__btn white__bg ">Quantum4u<i
+                                            class="fa-regular fa-long-arrow-right"></i></a>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12" style="">
+                        <div class="rts-blog__single">
+                            <a href="#">
+                                <img class="blog__thumb" src="assets/images/port/acr.jpg" alt="blog post thumb">
+                            </a>
+                            <div class="rts-blog__single--meta">
+                                <div class="cat__date">
+                                    <span class="cat offer">40M + Downloads </span>
+
+                                </div>
+                                <span class="title">Auto Call Recorder </span>
+                                <div class="author__content">
+                                    <!-- <a href="#">Tasks Handled</a> -->
+                                    <span>Record listen & share all your important calls</span>
+
+                                </div>
+                                <div class="rts-blog__single--author">
+
+
+                                </div>
+
+                                <div class="rts-hero__content--group sal-animate" data-sal="slide-down"
+                                    data-sal-delay="500" data-sal-duration="800">
+                                    <a href="https://play.google.com/store/apps/details?id=com.q4u.autocallrecorder"
+                                        target="_blank" class="primary__btn white__bg ">Q4U Mobile <i
+                                            class="fa-regular fa-long-arrow-right"></i></a>
+                                    <a href="https://play.google.com/store/apps/details?id=com.app.autocallrecorder"
+                                        target="_blank" class="primary__btn white__bg">Quantum4U<i
+                                            class="fa-regular fa-long-arrow-right"></i></a>
+
+                                    <a href="https://play.google.com/store/apps/details?id=com.appnextg.acr"
+                                        target="_blank" class="primary__btn white__bg">AppNextG<i
+                                            class="fa-regular fa-long-arrow-right"></i></a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="rts-blog__single">
+                            <a href="#">
+                                <img class="blog__thumb" src="assets/images/port/shareall.jpg"
+                                    alt="fortune-website-mockup">
+                            </a>
+                            <div class="rts-blog__single--meta">
+                                <div class="cat__date">
+                                    <span class="cat offer">45M + Downloads </span>
+
+                                </div>
+                                <span class="title">ShareAll </span>
+                                <div class="author__content">
+
+                                    <span>Files transfer from device to device without cables. Only iOS version is
+                                        avaiable</span>
+
+                                </div>
+                                <div class="rts-blog__single--author">
+                                    <!--  <div class="author">
+                                    <img src="assets/images/author/author__one.png" alt="">
+                                </div> -->
+
+                                </div>
+
+
+
+                                <div class="rts-hero__content--group sal-animate" data-sal="slide-down"
+                                    data-sal-delay="500" data-sal-duration="800">
+                                    <a href="https://apps.apple.com/tr/app/poleshare-transfer-send/id1535744130"
+                                        target="_blank" class="primary__btn white__bg ">Quantum4u <i
+                                            class="fa-regular fa-long-arrow-right"></i></a>
+
+
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="rts-blog__single">
+                            <a href="#">
+                                <img class="blog__thumb" src="assets/images/port/pedometer.png"
+                                    alt="fortune-website-mockup">
+                            </a>
+                            <div class="rts-blog__single--meta">
+                                <div class="cat__date">
+                                    <span class="cat offer">100K + Downloads </span>
+
+                                </div>
+                                <span class="title">Pedometer </span>
+                                <div class="author__content">
+
+                                    <span>Tracking your steps, achieving fitness goals, and promoting weight loss</span>
+
+                                </div>
+                                <div class="rts-blog__single--author">
+                                    <!--  <div class="author">
+                                    <img src="assets/images/author/author__one.png" alt="">
+                                </div> -->
+
+                                </div>
+                                <div class="rts-hero__content--group sal-animate" data-sal="slide-down"
+                                    data-sal-delay="500" data-sal-duration="800">
+                                    <a href="https://play.google.com/store/apps/details?id=com.quantum.padometer"
+                                        target="_blank" class="primary__btn white__bg ">Quantum4u<i
+                                            class="fa-regular fa-long-arrow-right"></i></a>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="rts-blog__single">
+                            <a href="#">
+                                <img class="blog__thumb" src="assets/images/port/screenmirror.jpg"
+                                    alt="fortune-website-mockup">
+                            </a>
+                            <div class="rts-blog__single--meta">
+                                <div class="cat__date">
+                                    <span class="cat offer">5M + Downloads </span>
+
+                                </div>
+                                <span class="title">Miracast & TV Cast </span>
+                                <div class="author__content">
+
+                                    <span>Lets you mirror your phone screen on your Smart TV in high-quality</span>
+
+
+
+                                </div>
+                                <div class="rts-blog__single--author">
+                                    <!--  <div class="author">
+                                    <img src="assets/images/author/author__one.png" alt="">
+                                </div> -->
+
+                                </div>
+                                <div class="rts-hero__content--group sal-animate" data-sal="slide-down"
+                                    data-sal-delay="500" data-sal-duration="800">
+                                    <a href="https://play.google.com/store/apps/details?id=com.pnd.shareall"
+                                        target="_blank" class="primary__btn white__bg ">Quantum4u<i
+                                            class="fa-regular fa-long-arrow-right"></i></a>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="rts-blog__single">
+                            <a href="#">
+                                <img class="blog__thumb" src="assets/images/port/solostar.png"
+                                    alt="fortune-website-mockup">
+                            </a>
+                            <div class="rts-blog__single--meta">
+                                <div class="cat__date">
+                                    <span class="cat offer">100k+ Downloads </span>
+
+                                </div>
+                                <span class="title">Solo Star </span>
+                                <div class="author__content">
+                                    <span>Create awesome short videos, publish them, and watch the likes rolling-in. The
+                                        app is
+                                        live but not active</span>
+                                </div>
+                                <div class="rts-blog__single--author">
+                                    <!--  <div class="author">
+                                    <img src="assets/images/author/author__one.png" alt="">
+                                </div> -->
+
+
+
+
+
+                                </div>
+                                <div class="rts-hero__content--group sal-animate" data-sal="slide-down"
+                                    data-sal-delay="500" data-sal-duration="800">
+                                    <a href="https://play.google.com/store/apps/details?id=com.quantum.mastivideo"
+                                        target="_blank" class="primary__btn white__bg ">Quantum4u<i
+                                            class="fa-regular fa-long-arrow-right"></i></a>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="rts-blog__single">
+                            <a href="#">
+                                <img class="blog__thumb" src="assets/images/port/stv.jpg" alt="fortune-website-mockup">
+                            </a>
+                            <div class="rts-blog__single--meta">
+                                <div class="cat__date">
+                                    <span class="cat offer">Client project </span>
+
+                                </div>
+                                <span class="title">STV </span>
+                                <p class="description"> Provide authentic, unbiased reviews curated by industry experts
+                                    chosen by STV</p>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="rts-blog__single">
+                            <a href="#">
+                                <img class="blog__thumb" src="assets/images/port/shout.jpg"
+                                    alt="fortune-website-mockup">
+                            </a>
+                            <div class="rts-blog__single--meta">
+                                <div class="cat__date">
+                                    <a href="#" class="cat offer">Client project </a>
+
+                                </div>
+                                <span class="title">SHout </span>
+                                <div class="rts-blog__single--author">
+                                    <!--  <div class="author">
+                                    <img src="assets/images/author/author__one.png" alt="">
+                                </div> -->
+                                    <div class="author__content">
+                                        <span>Problem Statement</span>
+                                        <p class="description">Connect with new friends nearby through video chat, text,
+                                            voice messages, or live sessions. The app's future goal is to evolve into a
+                                            video e-commerce platform.</p>
+                                    </div>
+
+                                </div>
+
+                                <div class="rts-blog__single--author">
+                                    <!--  <div class="author">
+                                    <img src="assets/images/author/author__one.png" alt="">
+                                </div> -->
+                                    <div class="author__content">
+                                        <span>Goals</span>
+                                        <p class="description">Design a user-friendly interface inspired by top apps in
+                                            the same category.</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="quantum4u-carousel__arrow quantum4u-carousel__arrow--next" type="button"
+                    aria-label="Show next Quantum4u projects">
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+    <!-- FOOTER AREA -->
+
+    <footer class="rts-footer site-footer-one section__padding">
+
+        <div class="container">
+            <div class="row">
+                <div class="rts-footer__copyright text-center">
+                    <p>© ROHIT SINGH</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+    <!-- FOOTER AREA END -->
+
+    <div id="anywhere-home" class="">
+    </div>
+
+    <!-- side bar area  -->
+    <div id="side-bar" class="side-bar header-two">
+        <button class="close-icon-menu"><i class="fa-sharp fa-thin fa-xmark"></i></button>
+        <!-- mobile menu area start -->
+        <div class="mobile-menu-main">
+            <nav class="nav-main mainmenu-nav mt--30">
+                <ul class="mainmenu metismenu" id="mobile-menu-active">
+                    <li class="menu-item"><a href="https://www.linkedin.com/in/rohitsinghuiux/" target="_blank"
+                            class="FDC-dropdown-main-element">Linkedin</a></li>
+                    <li class="menu-item"><a href="https://www.youtube.com/@RohitUXD/videos" target="_blank"
+                            class="FDC-dropdown-main-element">Youtube</a></li>
+                </ul>
+            </nav>
+
+
+        </div>
+        <!-- mobile menu area end -->
+    </div>
+    <!-- side abr area end -->
+
+
+
+    <!-- BACK TO TOP AREA START -->
+    <div class="progress-wrap">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
+                style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;">
+            </path>
+        </svg>
+    </div>
+    <!-- BACK TO TOP AREA EDN -->
+
+    <!-- jquery js -->
+    <script defer src="assets/js/plugins/jquery.min.js"></script>
+    <!-- <script defer src="assets/js/plugins/popper.js"></script> -->
+    <!-- <script defer src="assets/js/plugins/bootstrap.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+
+
+    <script defer src="assets/js/plugins/metismenu.js"></script>
+    <!-- <script defer src="assets/js/vendor/jqueryui.js"></script> -->
+    <script defer src="assets/js/vendor/waypoint.js"></script>
+    <script defer src="assets/js/vendor/locomotive.js"></script>
+    <!-- <script defer src="assets/js/plugins/swiper.js"></script> -->
+    <!-- <script defer src="assets/js/plugins/theia-sticky-sidebar.min.js"></script> -->
+    <script defer src="assets/js/plugins/jquery.nice-select.min.js"></script>
+    <script defer src="assets/js/plugins/sal.js"></script>
+    <script defer src="assets/js/vendor/waw.js"></script>
+    <script defer src="assets/js/plugins/counter-up.js"></script>
+    <!-- <script defer src="assets/js/plugins/magnific-popup.js"></script> -->
+    <script defer src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+    <script defer src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+    <!-- contact form js -->
+    <!-- <script defer src="assets/js/plugins/contact-form.js"></script> -->
+    <script defer src="assets/js/main.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script>
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && typeof Lenis !== 'undefined') {
+            var lenis = new Lenis({
+                duration: 1.4,
+                easing: function (t) {
+                    return Math.min(1, 1.001 - Math.pow(2, -10 * t));
+                },
+                smoothWheel: true,
+                wheelMultiplier: 0.85,
+                touchMultiplier: 1,
+                anchors: true
+            });
+
+            lenis.on('scroll', function () {
+                if (window.ScrollTrigger) {
+                    window.ScrollTrigger.update();
+                }
+            });
+
+            function lenisAnimationFrame(time) {
+                lenis.raf(time);
+                requestAnimationFrame(lenisAnimationFrame);
+            }
+
+            requestAnimationFrame(lenisAnimationFrame);
+        }
+    </script>
+    <script>
+        document.querySelectorAll('.quantum4u-carousel').forEach(function (carousel) {
+            var track = carousel.querySelector('.quantum4u-cards');
+            var previous = carousel.querySelector('.quantum4u-carousel__arrow--prev');
+            var next = carousel.querySelector('.quantum4u-carousel__arrow--next');
+
+            function updateArrows() {
+                previous.disabled = track.scrollLeft <= 1;
+                next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
+            }
+
+            function scrollCards(direction) {
+                var card = track.querySelector('[class*="col-"]');
+                var distance = card ? card.getBoundingClientRect().width : track.clientWidth;
+                track.scrollBy({ left: direction * distance, behavior: 'smooth' });
+            }
+
+            previous.addEventListener('click', function () { scrollCards(-1); });
+            next.addEventListener('click', function () { scrollCards(1); });
+            track.addEventListener('scroll', updateArrows, { passive: true });
+            window.addEventListener('resize', updateArrows);
+            updateArrows();
+        });
+    </script>
+
+
+    <!--  <script type="text/javascript">
+        $(window).load(function() {
+  $("body").removeClass("preload");
+});
+    </script>  -->
+
+
+    <!-- <script>
+    window.addEventListener('load', function() {
+  const animatedElement = document.querySelector('.animated');
+  if (animatedElement) {
+    animatedElement.classList.add('start-animation');
+  }
+});
+
+</script>
+ -->
+
+    <!-- 
+// script.js
+$(window).on('load', function() {
+  $('body').removeClass('preload1');
+  $('.element').addClass('visible');
+});
+</script>
+ -->
+
+    <sc </body>
+
+
+
+</html>
