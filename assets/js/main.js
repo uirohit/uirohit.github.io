@@ -285,7 +285,9 @@
 
       },  
       wowActive: function () {
-        new WOW().init();
+        if (typeof WOW !== 'undefined') {
+          new WOW().init();
+        }
       },
       salActive: function () {
         sal({
@@ -320,11 +322,13 @@
       },
 
       counterUp: function (e) {
-        $('.counter').counterUp({
-          delay: 10,
-          time: 1000
-        });
-        $('.counter').addClass('animated fadeInDownBig');
+        if (typeof $.fn.counterUp !== 'undefined') {
+          $('.counter').counterUp({
+            delay: 10,
+            time: 1000
+          });
+          $('.counter').addClass('animated fadeInDownBig');
+        }
       },
 
 
@@ -419,7 +423,9 @@
   
 
     $(document).ready(function() {
-      $('select').niceSelect();
+      if (typeof $.fn.niceSelect !== 'undefined') {
+        $('select').niceSelect();
+      }
     });
 
     $(window).on("scroll", function() {
@@ -547,9 +553,10 @@
 
 
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
 
-window.addEventListener("load", () => {
+  window.addEventListener("load", () => {
   gsap
     .timeline({
       scrollTrigger: {
@@ -576,4 +583,5 @@ window.addEventListener("load", () => {
       },
       "<"
     );
-});
+  });
+}
