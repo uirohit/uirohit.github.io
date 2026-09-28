@@ -18898,7 +18898,6 @@ header.heder-two .sub-dropdown .submenu.third-lvl.base {
   font-weight: 500;
   color: #000;
 }
-}
 
 @media screen and (max-width: 576px) {
   .rts-hero-four__content .banner__title {
@@ -28311,7 +28310,6 @@ p.description {
   height: 3px;
   /*    background-image: linear-gradient(to right, #6fbe2e 19%, #00bbd6 43%, #0f61a9 57%, #5a39a0 81%);*/
 }
-}
 
 .rts-hosting-type__single .hosting-icon {
   margin-bottom: 40px;
@@ -30014,7 +30012,6 @@ p.description {
   font-feature-settings: 'salt' on, 'ss13' on, 'ss07' on, 'ss12' on, 'calt' off;
   color: var(--bs-dark);
 }
-}
 
 .rts-hosting-feature .hosting-feature .feature {
   margin-bottom: 0;
@@ -31613,7 +31610,6 @@ p.description {
     /* max-width: 100%; */
     width: 80% !important;
     float: left;
-    !important;
     margin: auto;
   }
 
