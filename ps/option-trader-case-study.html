@@ -3331,6 +3331,12 @@
       text-align: left;
     }
 
+    @media (max-width: 640px) {
+      .intro-dark-container {
+        padding: 0 20px;
+      }
+    }
+
     .intro-dark-section .intro-tag {
       font-family: 'Lexend', sans-serif;
       font-size: 36px;
@@ -3817,6 +3823,17 @@
     @media (max-width: 560px) {
       .pf-carousel-wrapper {
         --pf-peek: calc(10% + 12px);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .discover-banner-container {
+        padding: 0 20px;
+      }
+
+      .backend-merged-section>section:not(.discover-banner-section):not(.pf-fullwidth-bg),
+      .section-merged-group>section:not(.discover-banner-section):not(.pf-fullwidth-bg) {
+        padding: 48px 20px;
       }
     }
 
